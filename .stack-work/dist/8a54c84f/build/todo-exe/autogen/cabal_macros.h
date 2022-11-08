@@ -30,6 +30,56 @@
   (major1) == 4 && (major2) <  16 || \
   (major1) == 4 && (major2) == 16 && (minor) <= 3)
 #endif /* MIN_VERSION_base */
+/* package monad-logger-0.3.37 */
+#ifndef VERSION_monad_logger
+#define VERSION_monad_logger "0.3.37"
+#endif /* VERSION_monad_logger */
+#ifndef MIN_VERSION_monad_logger
+#define MIN_VERSION_monad_logger(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  3 || \
+  (major1) == 0 && (major2) == 3 && (minor) <= 37)
+#endif /* MIN_VERSION_monad_logger */
+/* package mtl-2.2.2 */
+#ifndef VERSION_mtl
+#define VERSION_mtl "2.2.2"
+#endif /* VERSION_mtl */
+#ifndef MIN_VERSION_mtl
+#define MIN_VERSION_mtl(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  2 || \
+  (major1) == 2 && (major2) == 2 && (minor) <= 2)
+#endif /* MIN_VERSION_mtl */
+/* package persistent-2.13.3.5 */
+#ifndef VERSION_persistent
+#define VERSION_persistent "2.13.3.5"
+#endif /* VERSION_persistent */
+#ifndef MIN_VERSION_persistent
+#define MIN_VERSION_persistent(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  13 || \
+  (major1) == 2 && (major2) == 13 && (minor) <= 3)
+#endif /* MIN_VERSION_persistent */
+/* package persistent-postgresql-2.13.5.0 */
+#ifndef VERSION_persistent_postgresql
+#define VERSION_persistent_postgresql "2.13.5.0"
+#endif /* VERSION_persistent_postgresql */
+#ifndef MIN_VERSION_persistent_postgresql
+#define MIN_VERSION_persistent_postgresql(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  13 || \
+  (major1) == 2 && (major2) == 13 && (minor) <= 5)
+#endif /* MIN_VERSION_persistent_postgresql */
+/* package persistent-template-2.12.0.0 */
+#ifndef VERSION_persistent_template
+#define VERSION_persistent_template "2.12.0.0"
+#endif /* VERSION_persistent_template */
+#ifndef MIN_VERSION_persistent_template
+#define MIN_VERSION_persistent_template(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  12 || \
+  (major1) == 2 && (major2) == 12 && (minor) <= 0)
+#endif /* MIN_VERSION_persistent_template */
 /* package servant-server-0.19.2 */
 #ifndef VERSION_servant_server
 #define VERSION_servant_server "0.19.2"
@@ -50,6 +100,16 @@
   (major1) == 0 && (major2) <  1 || \
   (major1) == 0 && (major2) == 1 && (minor) <= 0)
 #endif /* MIN_VERSION_todo */
+/* package unliftio-core-0.2.0.1 */
+#ifndef VERSION_unliftio_core
+#define VERSION_unliftio_core "0.2.0.1"
+#endif /* VERSION_unliftio_core */
+#ifndef MIN_VERSION_unliftio_core
+#define MIN_VERSION_unliftio_core(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  2 || \
+  (major1) == 0 && (major2) == 2 && (minor) <= 0)
+#endif /* MIN_VERSION_unliftio_core */
 /* package wai-3.2.3 */
 #ifndef VERSION_wai
 #define VERSION_wai "3.2.3"
@@ -153,7 +213,7 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "todo-0.1.0.0-5YlE0pJm8Wq23P9Q6USt3J-todo-exe"
+#define CURRENT_COMPONENT_ID "todo-0.1.0.0-HkTOKimmOvF6FZe0JRpfIr-todo-exe"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"

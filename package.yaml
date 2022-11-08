@@ -25,6 +25,12 @@ dependencies:
 - servant-server
 - wai
 - warp
+- persistent
+- persistent-template
+- monad-logger
+- mtl
+- unliftio-core
+- persistent-postgresql
 
 ghc-options:
 - -Wall

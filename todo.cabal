@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Tes1
   other-modules:
       Paths_todo
   hs-source-dirs:
@@ -34,7 +35,13 @@ library
   build-depends:
       aeson
     , base >=4.7 && <5
+    , monad-logger
+    , mtl
+    , persistent
+    , persistent-postgresql
+    , persistent-template
     , servant-server
+    , unliftio-core
     , wai
     , warp
   default-language: Haskell2010
@@ -49,8 +56,14 @@ executable todo-exe
   build-depends:
       aeson
     , base
+    , monad-logger
+    , mtl
+    , persistent
+    , persistent-postgresql
+    , persistent-template
     , servant-server
     , todo
+    , unliftio-core
     , wai
     , warp
   default-language: Haskell2010
@@ -69,8 +82,14 @@ test-suite todo-test
     , hspec
     , hspec-wai
     , hspec-wai-json
+    , monad-logger
+    , mtl
+    , persistent
+    , persistent-postgresql
+    , persistent-template
     , servant-server
     , todo
+    , unliftio-core
     , wai
     , warp
   default-language: Haskell2010
