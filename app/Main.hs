@@ -1,9 +1,6 @@
 module Main (main) where
 
-import Lib
-import Tes1
+import Tes2
 
 main :: IO ()
-main = do migrateDB
-          cobainsert
-          putStrLn "halo"
+main = startApp

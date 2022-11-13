@@ -27,6 +27,7 @@ library
   exposed-modules:
       Lib
       Tes1
+      Tes2
   other-modules:
       Paths_todo
   hs-source-dirs:

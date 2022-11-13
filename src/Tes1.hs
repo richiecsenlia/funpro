@@ -15,14 +15,17 @@
 {-# LANGUAGE UndecidableInstances       #-}
 
 module Tes1
-    ( migrateDB,
-    insert1,
-    insert2,
-    cobainsert
-    ) where
+    -- ( migrateDB,
+    -- insert1,
+    -- insert2,
+    -- cobainsert,
+    -- cobaGet,
+    
+    -- getAllExpense
+     where
 
---import Data.Aeson
---import Data.Aeson.TH
+import qualified Data.Aeson as Aeson
+import Data.Aeson.TH
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
@@ -32,7 +35,7 @@ import Control.Monad.Reader
 import Control.Monad.IO.Unlift
 import Database.Persist.Postgresql --(ConnectionString, withPostgresqlConn, SqlPersistT,IsSqlBackend,runMigration,insert)
 import Database.Persist
-
+import Data.Int (Int64)
 --import Schema (migrateAll)
 
 PTH.share [PTH.mkPersist PTH.sqlSettings, PTH.mkMigrate "migrateAll"] [PTH.persistLowerCase|
@@ -41,7 +44,7 @@ Expense sql = expenses
     usage String
     deriving Show Read
 |]
-
+deriveJSON defaultOptions ''Expense
 -- data Expense = Expense
 --   { total        :: Int
 --   , usage :: String
@@ -66,8 +69,6 @@ migrateDB :: IO ()
 migrateDB = runAction connString (runMigration migrateAll)
 
 insertExpense :: (MonadIO m) => Int -> String -> SqlPersistT m (Key Expense)
---insert1 :: PersistRecordBackend (Entity a) SqlBackend => Entity a -> IO (Key (Entity a))
---insert2 :: PersistRecordBackend (Entity a) SqlBackend => Entity a -> IO (Key (Entity a))
 insertExpense a b = insert $ Expense a  b
 insert1 :: (MonadIO m) => SqlPersistT m (Key Expense)
 insert1 = insertExpense 20  "halo"
@@ -75,24 +76,13 @@ insert2 :: (MonadIO m) =>  SqlPersistT m (Key Expense)
 insert2 = insertExpense 10 "amin"
 cobainsert :: IO (Key Expense)
 cobainsert = runAction connString (insert1)
+createExpense :: Expense -> IO Int64
+createExpense expense = fromSqlKey <$> runAction connString (insert $ expense) 
 
--- $(deriveJSON defaultOptions ''User)
+getAllExpense :: (MonadIO m, MonadLogger m) => SqlPersistT m [Entity Expense]
+getAllExpense = selectList [] []
+cobaGet :: IO ([Entity Expense])
+cobaGet = runAction connString (getAllExpense)
 
--- type API = "users" :> Get '[JSON] [User]
 
--- startApp :: IO ()
--- startApp = run 8080 app
 
--- app :: Application
--- app = serve api server
-
--- api :: Proxy API
--- api = Proxy
-
--- server :: Server API
--- server = return users
-
--- users :: [User]
--- users = [ User 1 "Isaac" "Newton"
---         , User 2 "Albert" "Einstein"
---         ]

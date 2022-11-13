@@ -1,16 +1,20 @@
 {-# LANGUAGE DataKinds       #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeOperators   #-}
+
 module Lib
     ( startApp
     , app
     ) where
 
 import Data.Aeson
+import Data.Aeson.Types
 import Data.Aeson.TH
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
+import Data.Int (Int64)
+import Control.Monad.IO.Class (liftIO)
 
 data User = User
   { userId        :: Int
