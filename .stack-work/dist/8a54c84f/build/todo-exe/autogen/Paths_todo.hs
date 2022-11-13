@@ -42,12 +42,12 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
-bindir     = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\.stack-work\\install\\122630ee\\bin"
-libdir     = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\.stack-work\\install\\122630ee\\lib\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0-5YlE0pJm8Wq23P9Q6USt3J-todo-exe"
-dynlibdir  = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\.stack-work\\install\\122630ee\\lib\\x86_64-windows-ghc-9.2.4"
-datadir    = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\.stack-work\\install\\122630ee\\share\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0"
-libexecdir = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\.stack-work\\install\\122630ee\\libexec\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0"
-sysconfdir = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\.stack-work\\install\\122630ee\\etc"
+bindir     = "C:\\Dev\\Haskell\\Project\\funpro\\.stack-work\\install\\58ccce14\\bin"
+libdir     = "C:\\Dev\\Haskell\\Project\\funpro\\.stack-work\\install\\58ccce14\\lib\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0-JAmvPmliMjz1myVO8Skt5x-todo-exe"
+dynlibdir  = "C:\\Dev\\Haskell\\Project\\funpro\\.stack-work\\install\\58ccce14\\lib\\x86_64-windows-ghc-9.2.4"
+datadir    = "C:\\Dev\\Haskell\\Project\\funpro\\.stack-work\\install\\58ccce14\\share\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0"
+libexecdir = "C:\\Dev\\Haskell\\Project\\funpro\\.stack-work\\install\\58ccce14\\libexec\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0"
+sysconfdir = "C:\\Dev\\Haskell\\Project\\funpro\\.stack-work\\install\\58ccce14\\etc"
 
 getBinDir     = catchIO (getEnv "todo_bindir")     (\_ -> return bindir)
 getLibDir     = catchIO (getEnv "todo_libdir")     (\_ -> return libdir)
