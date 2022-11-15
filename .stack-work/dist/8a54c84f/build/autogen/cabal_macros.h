@@ -90,6 +90,16 @@
   (major1) == 0 && (major2) <  19 || \
   (major1) == 0 && (major2) == 19 && (minor) <= 2)
 #endif /* MIN_VERSION_servant_server */
+/* package time-1.11.1.1 */
+#ifndef VERSION_time
+#define VERSION_time "1.11.1.1"
+#endif /* VERSION_time */
+#ifndef MIN_VERSION_time
+#define MIN_VERSION_time(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  11 || \
+  (major1) == 1 && (major2) == 11 && (minor) <= 1)
+#endif /* MIN_VERSION_time */
 /* package unliftio-core-0.2.0.1 */
 #ifndef VERSION_unliftio_core
 #define VERSION_unliftio_core "0.2.0.1"
@@ -203,10 +213,10 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_PACKAGE_KEY
-#define CURRENT_PACKAGE_KEY "todo-0.1.0.0-2KEK19D0xwa9ftA7EZskss"
+#define CURRENT_PACKAGE_KEY "todo-0.1.0.0-36y0yeibZIM9BX60OqvOh"
 #endif /* CURRENT_packageKey */
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "todo-0.1.0.0-2KEK19D0xwa9ftA7EZskss"
+#define CURRENT_COMPONENT_ID "todo-0.1.0.0-36y0yeibZIM9BX60OqvOh"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"

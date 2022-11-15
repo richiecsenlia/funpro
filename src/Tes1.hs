@@ -36,12 +36,14 @@ import Control.Monad.IO.Unlift
 import Database.Persist.Postgresql --(ConnectionString, withPostgresqlConn, SqlPersistT,IsSqlBackend,runMigration,insert)
 import Database.Persist
 import Data.Int (Int64)
+import Data.Time
 --import Schema (migrateAll)
 
 PTH.share [PTH.mkPersist PTH.sqlSettings, PTH.mkMigrate "migrateAll"] [PTH.persistLowerCase|
 Expense sql = expenses
     total Int
     usage String
+    date Day Nullable nullable
     deriving Show Read
 |]
 deriveJSON defaultOptions ''Expense
@@ -68,12 +70,14 @@ runAction connectionString action = runStdoutLoggingT $ withPostgresqlConn conne
 migrateDB :: IO ()
 migrateDB = runAction connString (runMigration migrateAll)
 
-insertExpense :: (MonadIO m) => Int -> String -> SqlPersistT m (Key Expense)
-insertExpense a b = insert $ Expense a  b
-insert1 :: (MonadIO m) => SqlPersistT m (Key Expense)
-insert1 = insertExpense 20  "halo"
-insert2 :: (MonadIO m) =>  SqlPersistT m (Key Expense)
-insert2 = insertExpense 10 "amin"
+ekstrak (Just x) = x
+
+insertExpense :: (MonadIO m) => Int -> String -> Day -> SqlPersistT m (Key Expense)
+insertExpense a b c = insert $ Expense a  b  c
+insert1 :: (MonadIO m) => SqlPersistT m (Key Expense) 
+insert1 = insertExpense 30  "halo" (ekstrak(fromGregorianValid 2022 1 1))
+-- insert2 :: (MonadIO m) =>  SqlPersistT m (Key Expense)
+-- insert2 = insertExpense 10 "amin"
 cobainsert :: IO (Key Expense)
 cobainsert = runAction connString (insert1)
 createExpense :: Expense -> IO Int64
@@ -84,5 +88,27 @@ getAllExpense = selectList [] []
 cobaGet :: IO ([Entity Expense])
 cobaGet = runAction connString (getAllExpense)
 
+getAllExpense2 :: (MonadIO m, MonadLogger m) => SqlPersistT m [Entity Expense]
+getAllExpense2 = selectList [] []
+
+updateById:: (MonadIO m) => Int64 -> SqlPersistT m ()
+updateById id = update (toSqlKey id) [ExpenseTotal =. 1 ,ExpenseUsage =. "berhasil",ExpenseDate =. ekstrak(fromGregorianValid 2022 2 2) ]
+
+update1 :: (MonadIO m) => SqlPersistT m ()
+update1 = updateById 1
+update2 :: (MonadIO m) => SqlPersistT m ()
+update2 = updateById 2
+
+update3 :: (MonadIO m) => SqlPersistT m ()
+update3 = updateById 3
 
 
+cobaupdate1 :: IO ()
+cobaupdate1 = runAction connString (update1)
+
+
+cobaupdate2 :: IO ()
+cobaupdate2 = runAction connString (update2)
+
+cobaupdate3 :: IO ()
+cobaupdate3 = runAction connString (update3)

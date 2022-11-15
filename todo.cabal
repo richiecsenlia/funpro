@@ -42,6 +42,7 @@ library
     , persistent-postgresql
     , persistent-template
     , servant-server
+    , time
     , unliftio-core
     , wai
     , warp
@@ -63,6 +64,7 @@ executable todo-exe
     , persistent-postgresql
     , persistent-template
     , servant-server
+    , time
     , todo
     , unliftio-core
     , wai
@@ -89,6 +91,7 @@ test-suite todo-test
     , persistent-postgresql
     , persistent-template
     , servant-server
+    , time
     , todo
     , unliftio-core
     , wai

@@ -90,6 +90,16 @@
   (major1) == 0 && (major2) <  19 || \
   (major1) == 0 && (major2) == 19 && (minor) <= 2)
 #endif /* MIN_VERSION_servant_server */
+/* package time-1.11.1.1 */
+#ifndef VERSION_time
+#define VERSION_time "1.11.1.1"
+#endif /* VERSION_time */
+#ifndef MIN_VERSION_time
+#define MIN_VERSION_time(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  11 || \
+  (major1) == 1 && (major2) == 11 && (minor) <= 1)
+#endif /* MIN_VERSION_time */
 /* package todo-0.1.0.0 */
 #ifndef VERSION_todo
 #define VERSION_todo "0.1.0.0"
@@ -213,7 +223,7 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "todo-0.1.0.0-HkTOKimmOvF6FZe0JRpfIr-todo-exe"
+#define CURRENT_COMPONENT_ID "todo-0.1.0.0-36v3PGbt9Xb3ZAFRDjbe0L-todo-exe"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
