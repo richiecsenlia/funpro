@@ -9,6 +9,7 @@ import Data.Int (Int64)
 import Database.Persist
 import Database.Persist.Postgresql
 import Model
+import Servant (NoContent)
 
 connString :: ConnectionString
 connString = "host=127.0.0.1 port=5432 user=postgres dbname=funpro password=forget1010"
@@ -21,3 +22,9 @@ migrateDB = runAction connString (runMigration migrateAll)
 
 createNote :: Note -> IO Int64
 createNote note = fromSqlKey <$> runAction connString (insert note)
+
+getAllNote :: IO [Entity Note]
+getAllNote = runAction connString (selectList[][])
+
+updateNoteById :: Int64 -> Note -> IO ()
+updateNoteById id note = runAction connString (replace (toSqlKey id) note)

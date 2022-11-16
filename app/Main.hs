@@ -1,6 +1,8 @@
 module Main (main) where
 
 import Server
+import Database (migrateDB)
 
 main :: IO ()
-main = startApp
+main = do migrateDB
+          startApp

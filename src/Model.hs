@@ -14,16 +14,20 @@
 
 module Model where
 
-import Data.Aeson (defaultOptions)
+import Data.Aeson (defaultOptions, ToJSON, toJSON)
 import Data.Aeson.TH (deriveJSON)
 import Data.Text (Text)
+import Database.Persist 
 import qualified Database.Persist.TH as PTH
 
 PTH.share [PTH.mkPersist PTH.sqlSettings, PTH.mkMigrate "migrateAll"] [PTH.persistLowerCase|
-Note sql = notes
+Note sql=notes
     title Text
     body Text
     deriving Show Read
 |]
 
 deriveJSON defaultOptions ''Note
+
+instance ToJSON (Entity Note) where
+  toJSON = entityIdToJSON
