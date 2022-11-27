@@ -120,6 +120,16 @@
   (major1) == 3 && (major2) <  2 || \
   (major1) == 3 && (major2) == 2 && (minor) <= 3)
 #endif /* MIN_VERSION_wai */
+/* package wai-cors-0.2.7 */
+#ifndef VERSION_wai_cors
+#define VERSION_wai_cors "0.2.7"
+#endif /* VERSION_wai_cors */
+#ifndef MIN_VERSION_wai_cors
+#define MIN_VERSION_wai_cors(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  2 || \
+  (major1) == 0 && (major2) == 2 && (minor) <= 7)
+#endif /* MIN_VERSION_wai_cors */
 /* package warp-3.3.21 */
 #ifndef VERSION_warp
 #define VERSION_warp "3.3.21"
@@ -213,10 +223,10 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_PACKAGE_KEY
-#define CURRENT_PACKAGE_KEY "todo-0.1.0.0-36y0yeibZIM9BX60OqvOh"
+#define CURRENT_PACKAGE_KEY "todo-0.1.0.0-EtBBdX4HWdR8HyDOnTIZL8"
 #endif /* CURRENT_packageKey */
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "todo-0.1.0.0-36y0yeibZIM9BX60OqvOh"
+#define CURRENT_COMPONENT_ID "todo-0.1.0.0-EtBBdX4HWdR8HyDOnTIZL8"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"

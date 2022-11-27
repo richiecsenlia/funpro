@@ -14,8 +14,13 @@ import Servant
 import Tes1
 import Data.Int (Int64)
 import Database.Persist
-type UsersAPI = "expenseall" :> Get '[JSON] [Expense] :<|> "users" :> ReqBody '[JSON] Expense :> Post '[JSON] Int64
+import Network.Wai.Middleware.Cors
+type UsersAPI = "expenseall" :> Get '[JSON] [Expense] :<|> "expense" :> ReqBody '[JSON] Expense :> Post '[JSON] Int64
 
+corsConfig :: Middleware
+corsConfig = cors (const $ Just policy)
+  where
+    policy = simpleCorsResourcePolicy {corsExposedHeaders = Just ["X-Total-Count"]}
 cobacoba = do isi <- cobaGet
               return (map entityVal isi)
 
@@ -31,6 +36,6 @@ usersAPI :: Proxy UsersAPI
 usersAPI = Proxy :: Proxy UsersAPI
 
 app :: Application
-app = serve usersAPI usersServer
+app =  simpleCors $ serve usersAPI usersServer
 startApp :: IO ()
 startApp = run 8080 app

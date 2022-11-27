@@ -32,6 +32,7 @@ dependencies:
 - unliftio-core
 - persistent-postgresql
 - time
+- wai-cors
 
 ghc-options:
 - -Wall

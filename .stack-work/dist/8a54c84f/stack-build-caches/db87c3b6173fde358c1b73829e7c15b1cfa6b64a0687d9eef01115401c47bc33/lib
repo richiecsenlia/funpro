@@ -1,20 +1,22 @@
 ? C:\Users\LENOVO\AppData\Local\Programs\stack\x86_64-windows\ghc-9.2.4\lib\x86_64-windows-ghc-9.2.4\rts-1.0.2\include\ghcversion.h
 : hash: 10956c75ad026836b21386f797118415977972aadb829739b07017baf8b98338
 C:\Users\LENOVO\Documents\FunPro\todo\.stack-work\dist\8a54c84f\build\autogen\Paths_todo.hs:
-  hash: 3cb34d09e4e4cd7c1cabcdb9d9af68c04bac4955ba074944a207481923edd28c
+  hash: 571cee5d55249d96dc4618e6414d676f5ff4a43f027329282ec4469875ade95f
 C:\Users\LENOVO\Documents\FunPro\todo\.stack-work\dist\8a54c84f\build\autogen\cabal_macros.h:
-  hash: 57d3200a3900860123683ad27ba34722950d2dc8782d6277997c61820f7ae7b2
+  hash: cbd46f9e7e3ba2cc0e67250b5c66d8733ff090b8a0e6405212fda784072d5747
 C:\Users\LENOVO\Documents\FunPro\todo\CHANGELOG.md:
   hash: bf63ea70293a35924af9ec19b89e7836f947a0c89f2df512e9d8aea5c3e9db11
 C:\Users\LENOVO\Documents\FunPro\todo\README.md:
   hash: 69780e3401cc9c9ff9e8a94814a724f62372324209ba9b2325b78a2dddcdd5f1
 C:\Users\LENOVO\Documents\FunPro\todo\package.yaml:
-  hash: 2d414ecf99114a8be8bcbe2dd2045d6c9a464f628b7c36a9e437f150f5305e51
+  hash: 8045c03bb9c2abc8044b68a865e39ccbe9f9c849d2186b250b65cfa38d05e785
+C:\Users\LENOVO\Documents\FunPro\todo\src\Cors.hs:
+  hash: 8be3d7702566c38fecbfb61365e2b8cf8245de52ee4e0a03fff799b9f3cd7368
 C:\Users\LENOVO\Documents\FunPro\todo\src\Lib.hs:
   hash: c3bb8bfc07f283364ad4c230df38b31833706035f92c5486490aaadbf997647e
 C:\Users\LENOVO\Documents\FunPro\todo\src\Tes1.hs:
   hash: eb76b92a42423a203c32af967d3fbed55a42a6967663d105b30c7cb367aade49
 C:\Users\LENOVO\Documents\FunPro\todo\src\Tes2.hs:
-  hash: af9e719b6b2bb8aac5512692d6d9aa4dbe752864e13eb678147963ffdbdb7f9b
+  hash: 923b02c7d9dbe068a6f0b5538a8a14ae6540fe61bb0f7367130b740e26bf8cf3
 C:\Users\LENOVO\Documents\FunPro\todo\todo.cabal:
-  hash: a5aa7a708940eeb29b1e84fbad57dc5f2ee78c7cd83876b61514177a901a1f32
+  hash: 137cb0be2148dd4a2924d5874db68f52e9e4fda7d0dc976dbb279718308c3603
