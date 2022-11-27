@@ -112,3 +112,35 @@ cobaupdate2 = runAction connString (update2)
 
 cobaupdate3 :: IO ()
 cobaupdate3 = runAction connString (update3)
+
+deleteById :: Int64 -> IO ()
+deleteById id = runAction connString (delete (toSqlKey id :: ExpenseId))
+-- delete1 :: (MonadIO m) => SqlPersistT m ()
+-- delete1 = deleteById 1
+-- cobaDelete :: IO ()
+-- cobaDelete = runAction connString (delete1)
+--pesanBerhasil = "expense dihapus"
+deleteExpense :: Int64 -> IO (String)
+deleteExpense id = do 
+                    deleteById id
+                    return "expense dihapus"
+
+--cobadelete = deleteById 1
+getYear (a,b,c) = a
+isYear x y =  x ==  (getYear (toGregorian (expenseDate y)))
+
+filterYear x y = filter (isYear x) (y) 
+
+getMonth (a,b,c) = b
+isMonth x y = x == (getMonth (toGregorian (expenseDate y)))
+
+filterMonth x y = filter (isMonth x) y
+
+totalExpense :: [Expense] -> Int
+totalExpense [] = 0
+totalExpense x = foldr (+) 0 (map (expenseTotal) x)
+
+getTotalPerMonthInYear year x = forMonth [1,2,3,4,5,6,7,8,9,10,11,12] (filterYear year x)
+                                where
+                                    forMonth [] y = []
+                                    forMonth (a:b) y = (totalExpense (filterMonth a y)) : (forMonth b y)
