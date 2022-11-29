@@ -9,11 +9,11 @@ C:\Dev\Haskell\Project\funpro\README.md:
 C:\Dev\Haskell\Project\funpro\package.yaml:
   hash: 138e8a69e17546d2265554d8980b5cec5996e7722f811159424cd0713aa436f7
 C:\Dev\Haskell\Project\funpro\src\Database.hs:
-  hash: 3bf9f5c72c2a40898f387b234b622836554bb06ead35c4470dfe45927bf59ba5
+  hash: 6e7ebcfc51e411f931c9641d2c44b11ae812af77de4f4c66b009d7fafa4fe40f
 C:\Dev\Haskell\Project\funpro\src\Model.hs:
   hash: a295f438ce50f3c1a5610405f8beb0127f82e0e47441698580589d881e516ed7
 C:\Dev\Haskell\Project\funpro\src\Server.hs:
-  hash: 3fc95e35849bb55891ee34bfc78ead6e3fdae1a3b67c06354239612afc11f525
+  hash: 4d18d715c387d388ca0908c66852eea4dc0f6e01cdc72162accc907d51ad2a2e
 C:\Dev\Haskell\Project\funpro\todo.cabal:
   hash: a7abb7cf9d058e655b551962850be4bf9a32fede113f095424ecc857fb501ed9
 C:\Users\gloan\AppData\Local\Programs\stack\x86_64-windows\ghc-9.2.4\lib\x86_64-windows-ghc-9.2.4\rts-1.0.2\include\ghcversion.h:

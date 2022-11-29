@@ -17,9 +17,10 @@ import Database.Persist (Entity)
 import Model
 import Database
 
-type NotesAPI = "notes" :> Get '[JSON] [Entity Note]
-           :<|> "notes" :> ReqBody '[JSON] Note :> Post '[JSON] Int64
-           :<|> "notes" :> Capture "id" Int64 :> ReqBody '[JSON] Note :> Post '[JSON] ()
+type NotesAPI = "notes" :> "getall" :> Get '[JSON] [Entity Note]
+           :<|> "notes" :> "create" :> ReqBody '[JSON] Note :> Post '[JSON] Int64
+           :<|> "notes" :> "update" :> Capture "id" Int64 :> ReqBody '[JSON] Note :> Post '[JSON] ()
+           :<|> "notes" :> "delete" :> Capture "id" Int64 :> Delete '[JSON] ()
 
 notesAPI :: Proxy NotesAPI
 notesAPI = Proxy
@@ -33,8 +34,11 @@ getAllNoteHandler = liftIO $ getAllNote
 updateNoteHandler :: Int64 -> Note -> Handler ()
 updateNoteHandler id note = liftIO $ updateNoteById id note
 
+deleteNoteHandler :: Int64 -> Handler ()
+deleteNoteHandler id = liftIO $ deleteNoteById id
+
 notesServer :: Server NotesAPI
-notesServer = getAllNoteHandler :<|> createNoteHandler :<|> updateNoteHandler
+notesServer = getAllNoteHandler :<|> createNoteHandler :<|> updateNoteHandler :<|> deleteNoteHandler
 
 app :: Application
 app = serve notesAPI notesServer

@@ -28,3 +28,6 @@ getAllNote = runAction connString (selectList[][])
 
 updateNoteById :: Int64 -> Note -> IO ()
 updateNoteById id note = runAction connString (replace (toSqlKey id) note)
+
+deleteNoteById :: Int64 -> IO ()
+deleteNoteById id = runAction connString (delete (toSqlKey id :: NoteId))
