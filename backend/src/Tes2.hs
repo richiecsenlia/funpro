@@ -15,6 +15,7 @@ import Tes1
 import Data.Int (Int64)
 import Database.Persist
 import Network.Wai.Middleware.Cors
+import Network.HTTP.Types
 type UsersAPI = "expenseall" :> Get '[JSON] [Expense] 
                 :<|> "expense" :> ReqBody '[JSON] Expense :> Post '[JSON] Int64
                 :<|> "delete" :> Capture "id" Int64 :> Get '[JSON] String
@@ -57,7 +58,17 @@ usersServer = (fetchExpenseHandler) :<|> (createExpenseHandler) :<|> (deleteExpe
 usersAPI :: Proxy UsersAPI
 usersAPI = Proxy :: Proxy UsersAPI
 
+corsPolicy :: Middleware
+corsPolicy = cors (const $ Just policy)
+    where
+            policy = simpleCorsResourcePolicy
+                { 
+                    corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
+                    corsRequestHeaders = [hContentType,hAuthorization]
+                    
+                }
+
 app :: Application
-app =  simpleCors $ serve usersAPI usersServer
+app =  corsPolicy $ serve usersAPI usersServer
 startApp :: IO ()
 startApp = run 8080 app

@@ -33,7 +33,7 @@ dependencies:
 - persistent-postgresql
 - time
 - wai-cors
-
+- http-types
 ghc-options:
 - -Wall
 - -Wcompat

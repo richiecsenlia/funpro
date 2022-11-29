@@ -25,7 +25,6 @@ source-repository head
 
 library
   exposed-modules:
-      Cors
       Lib
       Tes1
       Tes2
@@ -37,6 +36,7 @@ library
   build-depends:
       aeson
     , base >=4.7 && <5
+    , http-types
     , monad-logger
     , mtl
     , persistent
@@ -60,6 +60,7 @@ executable todo-exe
   build-depends:
       aeson
     , base
+    , http-types
     , monad-logger
     , mtl
     , persistent
@@ -88,6 +89,7 @@ test-suite todo-test
     , hspec
     , hspec-wai
     , hspec-wai-json
+    , http-types
     , monad-logger
     , mtl
     , persistent
