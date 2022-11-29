@@ -1,0 +1,5 @@
+# Cabal cache
+dist-newstyle/*
+
+# Stack cache
+.stack-work/*
