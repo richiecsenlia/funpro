@@ -62,13 +62,13 @@ corsPolicy :: Middleware
 corsPolicy = cors (const $ Just policy)
     where
             policy = simpleCorsResourcePolicy
-                -- { 
-                --     corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
-                --     corsRequestHeaders = [hContentType,hAuthorization]
+                { 
+                     corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
+                     corsRequestHeaders = [hContentType,hAuthorization]
                     
-                -- }
+                 }
 
 app :: Application
-app =  simpleCors $ serve usersAPI usersServer
+app =  corsPolicy $ serve usersAPI usersServer
 startApp :: IO ()
 startApp = run 8080 app
