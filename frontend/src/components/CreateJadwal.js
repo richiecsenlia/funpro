@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import Axios from 'axios'
+import { Form, Button, Card } from 'react-bootstrap';
 
 function CreateJadwal(){
-	const url =""
+	const url ="http://localhost:8000/jadwal"
 
 	const [data, setData] = useState({
 		name: "",
@@ -15,10 +16,11 @@ function CreateJadwal(){
 		e.preventDefault()
 		console.log(data)
 		Axios.post(url,{
-			name: data.name,
-			date: data.date,
-			time: data.time,
-			notes: data.notes			
+			catatan: data.notes,
+			id_jadwal: 1,	// do not touch
+			nama_jadwal: data.name,
+			tanggal: data.date,
+			waktu: data.time	
 		})
 		.catch(function (err){
 			alert("Error occurs!")
@@ -37,27 +39,33 @@ function CreateJadwal(){
 	}
 
 	return(
-		<div>
+		<div style={{ margin: '1rem', width: "20rem" }}>
 			<p>Create Jadwal</p>
-			<form onSubmit={(e) => submit(e)}>
-				<label>
-					Nama Jadwal :
-					<input onChange={(e) => handle(e)} type="text" id="name" autoComplete="off" maxLength="10"></input>
-				</label>
-				<label>
-					Tanggal : 
-					<input onChange={(e) => handle(e)} type="date" id="date"></input>
-				</label>
-				<label>
-					Waktu : 
-					<input onChange={(e) => handle(e)} type="time" id="time"></input>
-				</label>
-				<label>
-					Catatan : 
-					<input onChange={(e) => handle(e)} type="text" id="notes" autoComplete="off" maxLength="50"></input>
-				</label>
-				<button>Submit</button>	
-			</form>
+			<Card>
+				<Form style={{ margin: "10px" }} onSubmit={(e) => submit(e)}>
+					<Form.Group style={{ width: "100%" }}>
+						<Form.Label>Nama Jadwal :</Form.Label>
+						<Form.Control onChange={(e) => handle(e)} type="text" id="name" autoComplete="off" maxLength="10"/>
+					</Form.Group>
+
+					<Form.Group style={{ width: "100%" }}>
+						<Form.Label>Tanggal :</Form.Label>
+						<Form.Control style={{ textAlign: 'center'}} onChange={(e) => handle(e)} type="date" id="date"/>
+					</Form.Group>
+
+					<Form.Group style={{ width: "100%" }}>
+						<Form.Label>Waktu :</Form.Label>
+						<Form.Control style={{ textAlign: 'center'}} onChange={(e) => handle(e)} type="time" id="time"/>
+					</Form.Group>
+
+					<Form.Group style={{ width: "100%" }}>
+						<Form.Label>Catatan :</Form.Label>
+						<Form.Control onChange={(e) => handle(e)} as="textarea" id="notes" autoComplete="off" maxLength="50" rows={6}/>
+					</Form.Group>
+					<Button type="submit" style={{ margin: 'auto'}}>Submit</Button>
+				</Form>
+			</Card>
+			
 		</div>
 	)
 }

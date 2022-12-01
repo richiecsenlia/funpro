@@ -26,6 +26,10 @@ dependencies:
 - scotty
 - aeson
 - text
+- wai-cors
+- wai
+- warp
+- http-types
 
 ghc-options:
 - -Wall
