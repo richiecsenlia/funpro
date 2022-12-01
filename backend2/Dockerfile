@@ -3,7 +3,7 @@ RUN apt-get update
 RUN apt install libpq-dev -y
 RUN cabal update
 EXPOSE 8080
-COPY todo.cabal .
+COPY backend2.cabal .
 COPY CHANGELOG.md .
 RUN cabal build --dependencies-only
 COPY app ./app
@@ -16,5 +16,5 @@ copy LICENSE .
 # COPY stack.yaml.lock .
 # copy test ./test
 # copy CHANGELOG.md .
-RUN cabal install exe:todo-exe
-ENTRYPOINT [ "todo-exe" ]
+RUN cabal install exe:backend2-exe
+ENTRYPOINT [ "backend2-exe" ]
