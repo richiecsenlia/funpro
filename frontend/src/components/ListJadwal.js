@@ -1,12 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import JadwalCard from "./JadwalCard"
 import axios from "axios"
-import { useEffect } from "react"
+import React from 'react';
 
 function ListJadwal(){
 
 	const [list, setList] = useState([])
-
 	useEffect(() => {
 		axios.get('http://localhost:8000/jadwal')
 		.then(res => {
@@ -15,15 +14,26 @@ function ListJadwal(){
 		})
 	}, []);
 
+	const handleDelete = (id) => {
+		axios.delete('http://localhost:8000/delete-jadwal/' + id)
+		.then(res => {
+			console.log(res.data)
+			window.location.reload();
+		})
+	}
+
 	const cards = list.map(item => {
 		return(
-			<JadwalCard
-				id={item.id_jadwal}
-				name={item.nama_jadwal}
-				date={item.tanggal}
-				time={item.waktu}
-				notes={item.catatan}
-			/>
+			<div key = {item.id_jadwal}>
+				<JadwalCard
+					id={item.id_jadwal}
+					name={item.nama_jadwal}
+					date={item.tanggal}
+					time={item.waktu}
+					notes={item.catatan}
+				/>
+				<button onClick={() => handleDelete(item.id_jadwal)}>Delete</button>
+			</div>
 		)
 	})
 

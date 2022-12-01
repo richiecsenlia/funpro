@@ -14,7 +14,6 @@ import Web.Scotty
 import Control.Monad.IO.Class
 import Network.Wai.Middleware.Cors
 import Network.Wai
-import Network.Wai.Handler.Warp
 import Network.HTTP.Types
 import Data.Aeson (FromJSON, ToJSON)
 
@@ -44,7 +43,7 @@ corsPolicy = cors (const $ Just policy)
   where
     policy = simpleCorsResourcePolicy
       { 
-        corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
+        corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions,methodDelete],
         corsRequestHeaders = [hContentType,hAuthorization]          
       }
 
@@ -64,6 +63,12 @@ main = do
         newJadwal <- jsonData :: ActionM Jadwal
         out <- liftIO (insertJadwal db newJadwal)
         html $ pack $ show $ fromInt64ToInt out
+    delete "/delete-jadwal/:jadwalId" $
+      do
+        jadwalId <- param "jadwalId"
+        out <- liftIO (deleteJadwal db jadwalId)
+        html $ pack $ show $ fromInt64ToInt out
+
 
 fromInt64ToInt :: Int64 -> Int
 fromInt64ToInt = fromIntegral
@@ -74,6 +79,9 @@ getJadwal db = (query_ db "SELECT * FROM funpro.jadwal" :: IO [Jadwal])
 insertJadwal :: Connection -> Jadwal -> IO Int64
 insertJadwal db Jadwal {nama_jadwal = nama, tanggal = tgl, waktu = wkt, catatan = cat} =
   execute db "INSERT INTO funpro.jadwal(nama_jadwal, tanggal, waktu, catatan) VALUES (?, ?, ?, ?)" (nama :: String, tgl :: Day, wkt :: TimeOfDay, cat :: String)
+
+deleteJadwal :: Connection -> Int -> IO Int64
+deleteJadwal db jadwalId = execute db "DELETE FROM funpro.jadwal WHERE id_jadwal = ?" [jadwalId :: Int]
 
 -- https://stackoverflow.com/questions/33374136/using-postgres-simple-how-do-i-get-multiple-parameters-from-a-row
 -- https://dev.to/cdimitroulas/a-very-simple-json-api-in-haskell-1jgk
