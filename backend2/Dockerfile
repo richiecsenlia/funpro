@@ -2,7 +2,7 @@ FROM haskell:9.2-slim
 RUN apt-get update
 RUN apt install libpq-dev -y
 RUN cabal update
-EXPOSE 8080
+EXPOSE 8000
 COPY backend2.cabal .
 COPY CHANGELOG.md .
 RUN cabal build --dependencies-only
