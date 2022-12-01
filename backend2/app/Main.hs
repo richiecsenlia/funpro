@@ -12,6 +12,10 @@ import Data.Int
 import Data.Text.Lazy
 import Web.Scotty
 import Control.Monad.IO.Class
+import Network.Wai.Middleware.Cors
+import Network.Wai
+import Network.Wai.Handler.Warp
+import Network.HTTP.Types
 import Data.Aeson (FromJSON, ToJSON)
 
 localPG :: ConnectInfo
@@ -35,10 +39,20 @@ instance FromJSON Jadwal
 instance FromRow Jadwal where
   fromRow = Jadwal <$> field <*> field <*> field <*> field <*> field
 
+corsPolicy :: Middleware
+corsPolicy = cors (const $ Just policy)
+  where
+    policy = simpleCorsResourcePolicy
+      { 
+        corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
+        corsRequestHeaders = [hContentType,hAuthorization]          
+      }
+
 main :: IO()
 main = do
   db <- connect localPG
   scotty 8000 $ do
+    middleware corsPolicy
     get "/" $ 
       do
         html "Hello!!"

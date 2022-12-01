@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Axios from 'axios'
 
 function CreateJadwal(){
-	const url =""
+	const url ="http://localhost:8000/jadwal"
 
 	const [data, setData] = useState({
 		name: "",
@@ -15,10 +15,11 @@ function CreateJadwal(){
 		e.preventDefault()
 		console.log(data)
 		Axios.post(url,{
-			name: data.name,
-			date: data.date,
-			time: data.time,
-			notes: data.notes			
+			catatan: data.notes,
+			id_jadwal: 1,	// do not touch
+			nama_jadwal: data.name,
+			tanggal: data.date,
+			waktu: data.time	
 		})
 		.catch(function (err){
 			alert("Error occurs!")
