@@ -3,7 +3,7 @@ import Axios from 'axios'
 import { Form, Button, Card } from 'react-bootstrap';
 
 function CreateJadwal(){
-	const url ="http://localhost:8000/jadwal"
+	const url ="https://funpro-production-28fa.up.railway.app/jadwal"
 
 	const [data, setData] = useState({
 		name: "",

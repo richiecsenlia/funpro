@@ -19,10 +19,10 @@ import Data.Aeson (FromJSON, ToJSON)
 
 localPG :: ConnectInfo
 localPG = defaultConnectInfo
-        { connectHost = "127.0.0.1"
-        , connectDatabase = "funpro"
+        { connectHost = "db.gnvlenttjmyipsadlofe.supabase.co"
+        , connectDatabase = "postgres"
         , connectUser = "postgres"
-        , connectPassword = "12052001"
+        , connectPassword = "Rt9GTWC2pSP1mvsB"
         }
 
 data Jadwal = Jadwal
@@ -74,14 +74,14 @@ fromInt64ToInt :: Int64 -> Int
 fromInt64ToInt = fromIntegral
 
 getJadwal :: Connection -> IO [Jadwal]
-getJadwal db = (query_ db "SELECT * FROM funpro.jadwal" :: IO [Jadwal])
+getJadwal db = (query_ db "SELECT * FROM jadwal" :: IO [Jadwal])
 
 insertJadwal :: Connection -> Jadwal -> IO Int64
 insertJadwal db Jadwal {nama_jadwal = nama, tanggal = tgl, waktu = wkt, catatan = cat} =
-  execute db "INSERT INTO funpro.jadwal(nama_jadwal, tanggal, waktu, catatan) VALUES (?, ?, ?, ?)" (nama :: String, tgl :: Day, wkt :: TimeOfDay, cat :: String)
+  execute db "INSERT INTO jadwal(nama_jadwal, tanggal, waktu, catatan) VALUES (?, ?, ?, ?)" (nama :: String, tgl :: Day, wkt :: TimeOfDay, cat :: String)
 
 deleteJadwal :: Connection -> Int -> IO Int64
-deleteJadwal db jadwalId = execute db "DELETE FROM funpro.jadwal WHERE id_jadwal = ?" [jadwalId :: Int]
+deleteJadwal db jadwalId = execute db "DELETE FROM jadwal WHERE id_jadwal = ?" [jadwalId :: Int]
 
 -- https://stackoverflow.com/questions/33374136/using-postgres-simple-how-do-i-get-multiple-parameters-from-a-row
 -- https://dev.to/cdimitroulas/a-very-simple-json-api-in-haskell-1jgk

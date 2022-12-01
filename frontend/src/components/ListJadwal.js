@@ -9,7 +9,7 @@ function ListJadwal(){
 	const [list, setList] = useState([])
 
 	useEffect(() => {
-		axios.get('http://localhost:8000/jadwal')
+		axios.get('https://funpro-production-28fa.up.railway.app/jadwal')
 		.then(res => {
 			console.log(res.data)
 			setList(res.data)
@@ -17,7 +17,7 @@ function ListJadwal(){
 	}, []);
 
 	const handleDelete = (id) => {
-		axios.delete('http://localhost:8000/delete-jadwal/' + id)
+		axios.delete('https://funpro-production-28fa.up.railway.app/delete-jadwal/' + id)
 		.then(res => {
 			console.log(res.data)
 			window.location.reload();
