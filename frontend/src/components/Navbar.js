@@ -7,6 +7,7 @@ function Navbar(){
 			<button onClick={() => navigate('')}>Lihat Jadwal</button>
 			<button onClick={() => navigate('create-jadwal')}>Buat Jadwal</button>
 			<button onClick={() => navigate('allExpense')}>Lihat Pengeluaran</button>
+			<button onClick={() => navigate('notes')}>Lihat Note</button>
 		</div>
 	)
 }

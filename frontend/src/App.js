@@ -8,6 +8,8 @@ import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
 import CreateJadwal from './components/CreateJadwal'
 import Navbar from './components/Navbar'
+import Notes from "./components/Notes";
+import CreateNote from "./components/CreateNote"
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +22,9 @@ function App() {
           <Route path="create-jadwal" element={<CreateJadwal />}/>
           <Route path="*" element={<NoPage />} />
           
+
+        <Route path="notes" element={<Notes />} />
+        <Route path="notes/createnote" element={<CreateNote />} />
         
       </Routes>
     </BrowserRouter>
