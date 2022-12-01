@@ -14,6 +14,7 @@ import Network.Wai.Handler.Warp
 import Servant
 import Database.Persist (Entity)
 import Network.Wai.Middleware.Cors
+import Network.HTTP.Types
 
 import Model
 import Database
@@ -45,11 +46,11 @@ corsPolicy :: Middleware
 corsPolicy = cors (const $ Just policy)
     where
             policy = simpleCorsResourcePolicy
-                -- { 
-                --     corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
-                --     corsRequestHeaders = [hContentType,hAuthorization]
+                { 
+                    corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
+                    corsRequestHeaders = [hContentType,hAuthorization]
                     
-                -- }
+                }
 
 app :: Application
 app = simpleCors $ serve notesAPI notesServer

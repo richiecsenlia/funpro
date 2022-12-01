@@ -32,6 +32,7 @@ dependencies:
 - monad-logger
 - mtl
 - wai-cors
+- http-types
 
 ghc-options:
 - -Wall

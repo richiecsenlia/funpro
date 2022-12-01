@@ -13,11 +13,6 @@ function CreateNote() {
         e.preventDefault()
         console.log(data)
         Axios.post(url, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,HEAD,OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-            },
             noteTitle: data.title,
             noteBody: data.body,
         })
