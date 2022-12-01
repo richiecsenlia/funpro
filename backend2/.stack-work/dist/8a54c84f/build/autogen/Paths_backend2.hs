@@ -42,12 +42,12 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
-bindir     = "C:\\Users\\user\\OneDrive\\Universitas Indonesia\\Semester 5\\PemFung\\funpro\\backend2\\.stack-work\\install\\8e4708cd\\bin"
-libdir     = "C:\\Users\\user\\OneDrive\\Universitas Indonesia\\Semester 5\\PemFung\\funpro\\backend2\\.stack-work\\install\\8e4708cd\\lib\\x86_64-windows-ghc-9.2.5\\backend2-0.1.0.0-4sBW2pmHevGJoO45DKUcEt"
-dynlibdir  = "C:\\Users\\user\\OneDrive\\Universitas Indonesia\\Semester 5\\PemFung\\funpro\\backend2\\.stack-work\\install\\8e4708cd\\lib\\x86_64-windows-ghc-9.2.5"
-datadir    = "C:\\Users\\user\\OneDrive\\Universitas Indonesia\\Semester 5\\PemFung\\funpro\\backend2\\.stack-work\\install\\8e4708cd\\share\\x86_64-windows-ghc-9.2.5\\backend2-0.1.0.0"
-libexecdir = "C:\\Users\\user\\OneDrive\\Universitas Indonesia\\Semester 5\\PemFung\\funpro\\backend2\\.stack-work\\install\\8e4708cd\\libexec\\x86_64-windows-ghc-9.2.5\\backend2-0.1.0.0"
-sysconfdir = "C:\\Users\\user\\OneDrive\\Universitas Indonesia\\Semester 5\\PemFung\\funpro\\backend2\\.stack-work\\install\\8e4708cd\\etc"
+bindir     = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend2\\.stack-work\\install\\5234697e\\bin"
+libdir     = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend2\\.stack-work\\install\\5234697e\\lib\\x86_64-windows-ghc-9.2.5\\backend2-0.1.0.0-4sBW2pmHevGJoO45DKUcEt"
+dynlibdir  = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend2\\.stack-work\\install\\5234697e\\lib\\x86_64-windows-ghc-9.2.5"
+datadir    = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend2\\.stack-work\\install\\5234697e\\share\\x86_64-windows-ghc-9.2.5\\backend2-0.1.0.0"
+libexecdir = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend2\\.stack-work\\install\\5234697e\\libexec\\x86_64-windows-ghc-9.2.5\\backend2-0.1.0.0"
+sysconfdir = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend2\\.stack-work\\install\\5234697e\\etc"
 
 getBinDir     = catchIO (getEnv "backend2_bindir")     (\_ -> return bindir)
 getLibDir     = catchIO (getEnv "backend2_libdir")     (\_ -> return libdir)

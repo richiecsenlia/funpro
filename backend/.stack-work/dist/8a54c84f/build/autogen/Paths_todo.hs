@@ -42,12 +42,12 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
-bindir     = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\backend\\.stack-work\\install\\122630ee\\bin"
-libdir     = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\backend\\.stack-work\\install\\122630ee\\lib\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0-9x9gTTEfixpBEmJGAIprZb"
-dynlibdir  = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\backend\\.stack-work\\install\\122630ee\\lib\\x86_64-windows-ghc-9.2.4"
-datadir    = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\backend\\.stack-work\\install\\122630ee\\share\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0"
-libexecdir = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\backend\\.stack-work\\install\\122630ee\\libexec\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0"
-sysconfdir = "C:\\Users\\LENOVO\\Documents\\FunPro\\todo\\backend\\.stack-work\\install\\122630ee\\etc"
+bindir     = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend\\.stack-work\\install\\8f3660d6\\bin"
+libdir     = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend\\.stack-work\\install\\8f3660d6\\lib\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0-9x9gTTEfixpBEmJGAIprZb"
+dynlibdir  = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend\\.stack-work\\install\\8f3660d6\\lib\\x86_64-windows-ghc-9.2.4"
+datadir    = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend\\.stack-work\\install\\8f3660d6\\share\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0"
+libexecdir = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend\\.stack-work\\install\\8f3660d6\\libexec\\x86_64-windows-ghc-9.2.4\\todo-0.1.0.0"
+sysconfdir = "D:\\KULIAH\\SMT 5\\FUNPRO\\TUGAS KELOMPOK\\funpro\\backend\\.stack-work\\install\\8f3660d6\\etc"
 
 getBinDir     = catchIO (getEnv "todo_bindir")     (\_ -> return bindir)
 getLibDir     = catchIO (getEnv "todo_libdir")     (\_ -> return libdir)

@@ -8,6 +8,8 @@ import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
 import CreateJadwal from './components/CreateJadwal'
 import Navbar from './components/Navbar'
+import SignupForm from './components/Register'
+import LoginForm from './components/Login';
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +20,8 @@ function App() {
           <Route path="allExpense" element={<AllExpense />} />
           <Route path="contact" element={<Contact />} />
           <Route path="create-jadwal" element={<CreateJadwal />}/>
+          <Route path="register" element={<SignupForm />}/>
+          <Route path="login" element={<LoginForm />}/>
           <Route path="*" element={<NoPage />} />
           
         

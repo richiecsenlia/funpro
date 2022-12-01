@@ -19,7 +19,7 @@ localPG = defaultConnectInfo
         { connectHost = "127.0.0.1"
         , connectDatabase = "funpro"
         , connectUser = "postgres"
-        , connectPassword = "12052001"
+        , connectPassword = "gantengMC"
         }
 
 data Jadwal = Jadwal
