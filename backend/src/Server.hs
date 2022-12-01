@@ -13,6 +13,7 @@ import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
 import Database.Persist (Entity)
+import Network.Wai.Middleware.Cors
 
 import Model
 import Database
@@ -40,8 +41,18 @@ deleteNoteHandler id = liftIO $ deleteNoteById id
 notesServer :: Server NotesAPI
 notesServer = getAllNoteHandler :<|> createNoteHandler :<|> updateNoteHandler :<|> deleteNoteHandler
 
+corsPolicy :: Middleware
+corsPolicy = cors (const $ Just policy)
+    where
+            policy = simpleCorsResourcePolicy
+                -- { 
+                --     corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
+                --     corsRequestHeaders = [hContentType,hAuthorization]
+                    
+                -- }
+
 app :: Application
-app = serve notesAPI notesServer
+app = simpleCors $ serve notesAPI notesServer
 
 startApp :: IO ()
 startApp = run 8080 app

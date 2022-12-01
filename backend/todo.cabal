@@ -44,6 +44,7 @@ library
     , text
     , unliftio-core
     , wai
+    , wai-cors
     , warp
   default-language: Haskell2010
 
@@ -66,6 +67,7 @@ executable todo-exe
     , todo
     , unliftio-core
     , wai
+    , wai-cors
     , warp
   default-language: Haskell2010
 
@@ -92,5 +94,6 @@ test-suite todo-test
     , todo
     , unliftio-core
     , wai
+    , wai-cors
     , warp
   default-language: Haskell2010
