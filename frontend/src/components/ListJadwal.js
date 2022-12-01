@@ -1,11 +1,13 @@
 import { useState, useEffect} from 'react'
 import JadwalCard from "./JadwalCard"
 import axios from "axios"
-import React from 'react';
+import React from 'react'
+import { Card, Button} from 'react-bootstrap'
 
 function ListJadwal(){
 
 	const [list, setList] = useState([])
+
 	useEffect(() => {
 		axios.get('http://localhost:8000/jadwal')
 		.then(res => {
@@ -24,7 +26,7 @@ function ListJadwal(){
 
 	const cards = list.map(item => {
 		return(
-			<div key = {item.id_jadwal}>
+			<Card key = {item.id_jadwal} style={{ width: '300px' }}>
 				<JadwalCard
 					id={item.id_jadwal}
 					name={item.nama_jadwal}
@@ -32,15 +34,18 @@ function ListJadwal(){
 					time={item.waktu}
 					notes={item.catatan}
 				/>
-				<button onClick={() => handleDelete(item.id_jadwal)}>Delete</button>
-			</div>
+				<Button onClick={() => handleDelete(item.id_jadwal)}>Delete</Button>
+			</Card>
 		)
 	})
 
 	return(		
-		<div>
+		<div style={{ margin: '1rem'}}>
 			<p>List Jadwal</p>
-			{cards}
+			<div>
+				{cards}
+			</div>
+			
 		</div>
 	)
 }

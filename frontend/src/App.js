@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Home from "./pages/Home";
 import AllExpense from "./pages/AllExpense";
 import Contact from "./pages/Contact";
@@ -9,6 +7,7 @@ import NoPage from "./pages/NoPage";
 import CreateJadwal from './components/CreateJadwal'
 import Navbar from './components/Navbar'
 import ListJadwal from './components/ListJadwal';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

@@ -1,12 +1,14 @@
+import Card from 'react-bootstrap/Card'
+
 function JadwalCard(props){
 
     return(
-        <div>
-            <p>Nama Jadwal: {props.name}</p>
-            <p>Tanggal: {props.date}</p>
-            <p>Waktu: {props.time}</p>
-            <p>Catatan: {props.notes}</p>
-        </div>
+        <Card.Body>
+            <Card.Title style={{ textAlign: 'center', marginBottom: '10px'}}>{props.name}</Card.Title>
+            <Card.Subtitle style={{ fontSize: '14px', marginBottom: '5px'}}>Tanggal: {props.date}</Card.Subtitle>
+            <Card.Subtitle style={{ fontSize: '14px'}}>Pukul: {props.time}</Card.Subtitle>
+            <Card.Text style={{ textAlign: 'center', marginTop: '10px', fontSize: '14px'}}>{props.notes}</Card.Text>
+        </Card.Body>
     )
 }
 export default JadwalCard
