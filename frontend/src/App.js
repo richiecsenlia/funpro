@@ -15,7 +15,7 @@ import ListExpense from './components/ListExpense';
 import Search from './components/Search';
 import FilterExpense from './components/FilterExpense';
 function App() {
-  const url = "funpro.production.up.railway.app"
+  const url = "https://funpro-production.up.railway.app"
   return (
     <BrowserRouter>
       <Navbar/>

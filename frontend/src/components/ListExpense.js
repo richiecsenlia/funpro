@@ -5,7 +5,7 @@ import React from 'react'
 import { Card, Button} from 'react-bootstrap'
 
 function ListJadwal(props){
-	const url = "funpro-production.up.railway.app"
+	const url = "https://funpro-production.up.railway.app"
 
 	const [list, setList] = useState([])
 	useEffect(() => {

@@ -4,7 +4,7 @@ import { Form, Button, Card } from 'react-bootstrap';
 
 function CreateExpense(){
 	// const url ="http://localhost:8080/expense/"
-	const url = "funpro-production.up.railway.app/expense/"
+	const url = "https://funpro-production.up.railway.app/expense/"
 	const [data, setData] = useState({
 		total: 0,
 		usage: "",
