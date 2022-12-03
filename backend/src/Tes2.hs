@@ -19,10 +19,10 @@ import Network.HTTP.Types
 
 import Model
 import Database
-
-type UsersAPI = "expenseall" :> Get '[JSON] [Expense] 
+import Model2
+type UsersAPI = "expenseall" :> Get '[JSON] [Entity Expense]
                 :<|> "expense" :> ReqBody '[JSON] Expense :> Post '[JSON] Int64
-                :<|> "delete" :> Capture "id" Int64 :> Get '[JSON] String
+                :<|> "delete" :> Capture "id" Int64 :> Delete '[JSON] String
                 :<|> "expensekey" :> Get '[JSON] [Key Expense]
                 :<|> "filterexpenseyear" :> Capture "year" Integer :> Get '[JSON] [Expense]
                 :<|> "filterexpensemonth" :> Capture "month" Int :> Get '[JSON] [Expense]
@@ -32,23 +32,19 @@ type UsersAPI = "expenseall" :> Get '[JSON] [Expense]
                 :<|> "notes" :> "update" :> Capture "id" Int64 :> ReqBody '[JSON] Note :> Post '[JSON] ()
                 :<|> "notes" :> "delete" :> Capture "id" Int64 :> Delete '[JSON] ()
 
-cobacoba = do isi <- cobaGet
-              return (map entityVal isi)
 cobacoba2 = do 
-              isi <- cobaGet
+              isi <- getAllExpense
               return (map entityKey isi)
 cobacoba3 year = do
-              isi <- cobaGet
+              isi <- getAllExpense
               return (filterYear year (map entityVal isi))
 cobacoba4 month = do
-              isi <- cobaGet
+              isi <- getAllExpense
               return (filterMonth month (map entityVal isi))
 cobacoba5 year = do
-              isi <- cobaGet
+              isi <- getAllExpense
               return (getTotalPerMonthInYear year (map entityVal isi))
             
-fetchExpenseHandler ::  Handler [Expense]
-fetchExpenseHandler = liftIO cobacoba
 createExpenseHandler :: Expense -> Handler Int64
 createExpenseHandler expense = liftIO $ createExpense expense
 deleteExpenseHandler :: Int64 -> Handler String
@@ -61,7 +57,8 @@ filterMonthHandler :: Int -> Handler [Expense]
 filterMonthHandler month = liftIO $ cobacoba4 month
 totalPerMonthInYearHandler :: Integer -> Handler [Int]
 totalPerMonthInYearHandler year = liftIO $ cobacoba5 year
-
+getAllExpenseHandler :: Handler [Entity Expense]
+getAllExpenseHandler = liftIO $ getAllExpense
 createNoteHandler :: Note -> Handler Int64
 createNoteHandler note = liftIO $ createNote note
 
@@ -75,7 +72,7 @@ deleteNoteHandler :: Int64 -> Handler ()
 deleteNoteHandler id = liftIO $ deleteNoteById id
 
 usersServer :: Server UsersAPI
-usersServer =   (fetchExpenseHandler) 
+usersServer =   getAllExpenseHandler
                 :<|> (createExpenseHandler) 
                 :<|> (deleteExpenseHandler) 
                 :<|> (getIdHandler) 
@@ -95,9 +92,8 @@ corsPolicy = cors (const $ Just policy)
     where
             policy = simpleCorsResourcePolicy
                 { 
-                     corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
+                     corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions,methodDelete],
                      corsRequestHeaders = [hContentType,hAuthorization]
-                    
                  }
 
 app :: Application

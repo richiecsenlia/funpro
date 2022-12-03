@@ -12,22 +12,22 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE StandaloneDeriving #-}
 
-module Model where
+module Model2 where
 
 import Data.Aeson (defaultOptions, ToJSON, toJSON)
 import Data.Aeson.TH (deriveJSON)
 import Data.Text (Text)
 import Database.Persist 
 import qualified Database.Persist.TH as PTH
-
+import Data.Time
 PTH.share [PTH.mkPersist PTH.sqlSettings, PTH.mkMigrate "migrateAll"] [PTH.persistLowerCase|
-Note sql=notes
-    title Text
-    body Text
+Expense sql = expenses
+    total Int
+    usage String
+    date Day Nullable nullable
     deriving Show Read
 |]
+deriveJSON defaultOptions ''Expense
 
-deriveJSON defaultOptions ''Note
-
-instance ToJSON (Entity Note) where
+instance ToJSON (Entity Expense) where
   toJSON = entityIdToJSON

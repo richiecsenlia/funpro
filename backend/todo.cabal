@@ -27,6 +27,7 @@ library
   exposed-modules:
       Database
       Model
+      Model2
       Server
       Tes1
       Tes2

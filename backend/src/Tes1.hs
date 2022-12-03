@@ -37,16 +37,17 @@ import Database.Persist.Postgresql --(ConnectionString, withPostgresqlConn, SqlP
 import Database.Persist
 import Data.Int (Int64)
 import Data.Time
+import Model2
 --import Schema (migrateAll)
 
-PTH.share [PTH.mkPersist PTH.sqlSettings, PTH.mkMigrate "migrateAll"] [PTH.persistLowerCase|
-Expense sql = expenses
-    total Int
-    usage String
-    date Day Nullable nullable
-    deriving Show Read
-|]
-deriveJSON defaultOptions ''Expense
+-- PTH.share [PTH.mkPersist PTH.sqlSettings, PTH.mkMigrate "migrateAll"] [PTH.persistLowerCase|
+-- Expense sql = expenses
+--     total Int
+--     usage String
+--     date Day Nullable nullable
+--     deriving Show Read
+-- |]
+-- deriveJSON defaultOptions ''Expense
 -- data Expense = Expense
 --   { total        :: Int
 --   , usage :: String
@@ -83,10 +84,6 @@ cobainsert = runAction connString (insert1)
 createExpense :: Expense -> IO Int64
 createExpense expense = fromSqlKey <$> runAction connString (insert $ expense) 
 
-getAllExpense :: (MonadIO m, MonadLogger m) => SqlPersistT m [Entity Expense]
-getAllExpense = selectList [] []
-cobaGet :: IO ([Entity Expense])
-cobaGet = runAction connString (getAllExpense)
 
 getAllExpense2 :: (MonadIO m, MonadLogger m) => SqlPersistT m [Entity Expense]
 getAllExpense2 = selectList [] []
@@ -144,3 +141,6 @@ getTotalPerMonthInYear year x = forMonth [1,2,3,4,5,6,7,8,9,10,11,12] (filterYea
                                 where
                                     forMonth [] y = []
                                     forMonth (a:b) y = (totalExpense (filterMonth a y)) : (forMonth b y)
+
+getAllExpense :: IO [Entity Expense]
+getAllExpense = runAction connString (selectList[][])
