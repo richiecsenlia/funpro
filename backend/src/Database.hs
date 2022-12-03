@@ -12,7 +12,7 @@ import Model
 import Servant (NoContent)
 
 connString :: ConnectionString
-connString = "host=127.0.0.1 port=5432 user=postgres dbname=funpro password=forget1010"
+connString = "host=db.gnvlenttjmyipsadlofe.supabase.co port=5432 user=postgres dbname=postgres password=Rt9GTWC2pSP1mvsB"
 
 runAction :: MonadUnliftIO m => ConnectionString -> SqlPersistT (LoggingT m) a -> m a
 runAction connectionString action = runStdoutLoggingT $ withPostgresqlConn connectionString $ \backend -> runReaderT action backend

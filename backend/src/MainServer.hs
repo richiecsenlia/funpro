@@ -1,7 +1,7 @@
 {-# LANGUAGE DataKinds       #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeOperators   #-}
-module Tes2
+module MainServer
     ( startApp
     , app
     ) where
@@ -11,7 +11,6 @@ import Data.Aeson.TH
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
-import Tes1
 import Data.Int (Int64)
 import Database.Persist
 import Network.Wai.Middleware.Cors
@@ -20,6 +19,7 @@ import Network.HTTP.Types
 import Model
 import Database
 import Model2
+import Database2
 type UsersAPI = "expenseall" :> Get '[JSON] [Entity Expense]
                 :<|> "expense" :> ReqBody '[JSON] Expense :> Post '[JSON] Int64
                 :<|> "delete" :> Capture "id" Int64 :> Delete '[JSON] String
@@ -32,33 +32,51 @@ type UsersAPI = "expenseall" :> Get '[JSON] [Entity Expense]
                 :<|> "notes" :> "update" :> Capture "id" Int64 :> ReqBody '[JSON] Note :> Post '[JSON] ()
                 :<|> "notes" :> "delete" :> Capture "id" Int64 :> Delete '[JSON] ()
 
-cobacoba2 = do 
+getId = do 
               isi <- getAllExpense
               return (map entityKey isi)
-cobacoba3 year = do
-              isi <- getAllExpense
-              return (filterYear year (map entityVal isi))
-cobacoba4 month = do
-              isi <- getAllExpense
-              return (filterMonth month (map entityVal isi))
-cobacoba5 year = do
-              isi <- getAllExpense
-              return (getTotalPerMonthInYear year (map entityVal isi))
-            
+
+-- cobacoba3 year = do
+--               isi <- getAllExpense
+--               return (filterYear year (map entityVal isi))
+-- cobacoba4 month = do
+--               isi <- getAllExpense
+--               return (filterMonth month (map entityVal isi))
+-- cobacoba5 year = do
+--               isi <- getAllExpense
+--               return (getTotalPerMonthInYear year (map entityVal isi))
+
+filterExpense f x = do
+                    isi <- getAllExpense
+                    return (f x (map entityVal isi))
+
+getFilterYear x = filterExpense (filterYear) x
+
+getFIlterMonth x = filterExpense (filterMonth) x
+
+getTotal x =  filterExpense (getTotalPerMonthInYear) x
+
 createExpenseHandler :: Expense -> Handler Int64
 createExpenseHandler expense = liftIO $ createExpense expense
+
 deleteExpenseHandler :: Int64 -> Handler String
 deleteExpenseHandler id = liftIO $ deleteExpense id
+
 getIdHandler :: Handler [Key Expense]
-getIdHandler = liftIO cobacoba2
+getIdHandler = liftIO getId
+
 filterYearHandler :: Integer -> Handler [Expense]
-filterYearHandler year = liftIO $ cobacoba3 year
+filterYearHandler year = liftIO $ getFilterYear year
+
 filterMonthHandler :: Int -> Handler [Expense]
-filterMonthHandler month = liftIO $ cobacoba4 month
+filterMonthHandler month = liftIO $ getFIlterMonth month
+
 totalPerMonthInYearHandler :: Integer -> Handler [Int]
-totalPerMonthInYearHandler year = liftIO $ cobacoba5 year
+totalPerMonthInYearHandler year = liftIO $ getTotal year
+
 getAllExpenseHandler :: Handler [Entity Expense]
 getAllExpenseHandler = liftIO $ getAllExpense
+
 createNoteHandler :: Note -> Handler Int64
 createNoteHandler note = liftIO $ createNote note
 
