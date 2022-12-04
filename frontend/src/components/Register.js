@@ -14,11 +14,7 @@ import axios from "axios";
       try {
         const response = await axios.post(
           "http://localhost:8000/user",
-          {params :{
-            username: values.username,
-            email: values.email,
-            password: values.password
-          }}
+          values
         );
       localStorage.setItem('username',response.data[0].username)
       } catch (err) {
