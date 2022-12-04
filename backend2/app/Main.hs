@@ -13,6 +13,10 @@ import Data.Text.Lazy
 import Web.Scotty
 import Control.Monad.IO.Class
 import Data.Aeson (FromJSON, ToJSON)
+import User
+import Network.Wai.Middleware.Cors
+import Network.Wai
+import Network.HTTP.Types
 
 localPG :: ConnectInfo
 localPG = defaultConnectInfo
@@ -39,6 +43,7 @@ main :: IO()
 main = do
   db <- connect localPG
   scotty 8000 $ do
+    middleware corsPolicy
     get "/" $ 
       do
         html "Hello!!"
@@ -50,6 +55,16 @@ main = do
         newJadwal <- jsonData :: ActionM Jadwal
         out <- liftIO (insertJadwal db newJadwal)
         html $ pack $ show $ fromInt64ToInt out
+    get "/user" $
+      do
+        name <- param "username"
+        pass <- param "password"
+        json =<< liftIO (getUser db (name,pass))
+    post "/user" $
+      do
+        newUser <- jsonData :: ActionM User
+        out <- liftIO(createUser db newUser)
+        json =<< liftIO (getUser db (extractNP newUser))
 
 fromInt64ToInt :: Int64 -> Int
 fromInt64ToInt = fromIntegral
@@ -61,6 +76,15 @@ insertJadwal :: Connection -> Jadwal -> IO Int64
 insertJadwal db Jadwal {nama_jadwal = nama, tanggal = tgl, waktu = wkt, catatan = cat} =
   execute db "INSERT INTO funpro.jadwal(nama_jadwal, tanggal, waktu, catatan) VALUES (?, ?, ?, ?)" (nama :: String, tgl :: Day, wkt :: TimeOfDay, cat :: String)
 
+corsPolicy :: Middleware
+corsPolicy = cors (const $ Just policy)
+    where
+            policy = simpleCorsResourcePolicy
+                { 
+                     corsMethods = [methodGet,methodPost,methodPut,methodHead,methodOptions],
+                     corsRequestHeaders = [hContentType,hAuthorization]
+                    
+                 }
 -- https://stackoverflow.com/questions/33374136/using-postgres-simple-how-do-i-get-multiple-parameters-from-a-row
 -- https://dev.to/cdimitroulas/a-very-simple-json-api-in-haskell-1jgk
 -- https://hackage.haskell.org/package/scotty-0.12.1/docs/Web-Scotty.html # Web-Scotty documentation

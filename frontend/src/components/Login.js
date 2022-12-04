@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { useFormik } from 'formik';
 import axios, { AxiosError } from "axios";
  
  const LoginForm = () => {
+  const [username, setUsername] = useState('');
+
+  const set = () => {
+     localStorage.setItem('username', username);
+  }
    const formik = useFormik({
      initialValues: {
 
@@ -11,25 +16,30 @@ import axios, { AxiosError } from "axios";
         console.log("Values: ", values);
     
         try {
-          const response = await axios.post(
-            "http://localhost:9000/api/v1/login",
-            values
+          const response = await axios.get(
+            "http://localhost:8000/user",
+            {params :{
+              username: values.username,
+              password: values.password
+            }}
           );
-    
+
+        localStorage.setItem('username', response.data[0].username);
         } catch (err) {
           console.log("Error: ", err);
+          alert(err)
         }
       },
    });
    return (
      <form onSubmit={formik.handleSubmit}>
-       <label htmlFor="email">Email Address</label>
+       <label htmlFor="username">Username</label>
        <input
-         id="email"
-         name="email"
-         type="email"
+         id="username"
+         name="username"
+         type="username"
          onChange={formik.handleChange}
-         value={formik.values.email}
+         value={formik.values.username}
        />
        <label htmlFor="password">Password</label>
        <input

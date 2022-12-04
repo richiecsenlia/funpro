@@ -1,34 +1,41 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import axios from "axios";
  
  const SignupForm = () => {
    const formik = useFormik({
      initialValues: {
-       firstName: 'Budi',
-       lastName: 'Budiman',
-       email: 'budibudi@gmail.com',
+       username: 'Enter your username here (max 20 characters)',
+       email: 'Enter your email here',
      },
-     onSubmit: values => {
-       alert(JSON.stringify(values, null, 2));
-     },
+     onSubmit: async (values) => {
+      console.log("Values: ", values);
+  
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/user",
+          {params :{
+            username: values.username,
+            email: values.email,
+            password: values.password
+          }}
+        );
+      localStorage.setItem('username',response.data[0].username)
+      } catch (err) {
+        console.log("Error: ", err);
+        alert(err)
+      }
+    },
    });
    return (
      <form onSubmit={formik.handleSubmit}>
-       <label htmlFor="firstName">First Name</label>
+       <label htmlFor="username">Username</label>
        <input
-         id="firstName"
-         name="firstName"
-         type="text"
+         id="username"
+         name="username"
+         type="username"
          onChange={formik.handleChange}
-         value={formik.values.firstName}
-       />
-       <label htmlFor="lastName">Last Name</label>
-       <input
-         id="lastName"
-         name="lastName"
-         type="text"
-         onChange={formik.handleChange}
-         value={formik.values.lastName}
+         value={formik.values.username}
        />
        <label htmlFor="email">Email Address</label>
        <input
