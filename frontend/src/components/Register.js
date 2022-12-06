@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import axios from "axios";
+import Login from './Login';
  
  const SignupForm = () => {
    const formik = useFormik({
@@ -16,7 +17,8 @@ import axios from "axios";
           "http://localhost:8000/user",
           values
         );
-      localStorage.setItem('username',response.data[0].username)
+      localStorage.setItem('username', response.data[0].username);
+      window.location.reload(false)
       } catch (err) {
         console.log("Error: ", err);
         alert(err)

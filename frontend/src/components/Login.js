@@ -18,9 +18,7 @@ import axios, { AxiosError } from "axios";
               password: values.password
             }}
           );
-
-        localStorage.setItem('username', response.data[0].username);
-        window.location.reload(false)
+        login(response.data[0].username)
         } catch (err) {
           console.log("Error: ", err);
           alert(err)
@@ -50,4 +48,8 @@ import axios, { AxiosError } from "axios";
    );
  };
 
+ function login(username){
+      localStorage.setItem('username', username);
+      window.location.reload(false)
+ }
  export default LoginForm;
