@@ -27,11 +27,11 @@ instance FromRow User where
   fromRow = User <$> field <*> field <*> field
 
 getUser :: Connection -> (String,String)-> IO [User] 
-getUser db (name,pass) = query db "SELECT * FROM funpro.users WHERE username=? and password=?" (name :: String, pass :: String) :: IO[User]
+getUser db (name,pass) = query db "SELECT * FROM users WHERE username=? and password=?" (name :: String, pass :: String) :: IO[User]
 
 createUser :: Connection -> User -> IO Int64
 createUser db User{username=name, email=mail, password=pass} =
-  execute db "INSERT INTO funpro.users(username, email,password) VALUES (?, ?, ?)" (name :: String, mail :: String, pass :: String)
+  execute db "INSERT INTO users(username, email,password) VALUES (?, ?, ?)" (name :: String, mail :: String, pass :: String)
 
 extractNP :: User -> (String,String)
 extractNP User{username=name, email=mail, password=pass} = (name,pass)
