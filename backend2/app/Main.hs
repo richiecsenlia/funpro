@@ -16,7 +16,7 @@ import Network.Wai.Middleware.Cors
 import Network.Wai
 import Network.HTTP.Types
 import Data.Aeson (FromJSON, ToJSON)
-
+import Lib
 localPG :: ConnectInfo
 localPG = defaultConnectInfo
         { connectHost = "db.gnvlenttjmyipsadlofe.supabase.co"
@@ -49,6 +49,7 @@ corsPolicy = cors (const $ Just policy)
 
 main :: IO()
 main = do
+  somfunc
   db <- connect localPG
   scotty 8000 $ do
     middleware corsPolicy
