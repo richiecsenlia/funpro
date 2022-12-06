@@ -14,7 +14,7 @@ import Login from './Login';
   
       try {
         const response = await axios.post(
-          "http://localhost:8000/user",
+          "https://funpro-production-28fa.up.railway.app/user",
           values
         );
       localStorage.setItem('username', response.data[0].username);
