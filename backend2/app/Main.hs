@@ -49,7 +49,6 @@ corsPolicy = cors (const $ Just policy)
 
 main :: IO()
 main = do
-  somfunc
   db <- connect localPG
   scotty 8000 $ do
     middleware corsPolicy
