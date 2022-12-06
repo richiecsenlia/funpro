@@ -5,7 +5,7 @@ function Navbar(){
 	
 	let loggedIn;
 	if (localStorage.getItem('username')===null){
-		loggedIn = <button onClick={() => navigate('login')}>Login</button>
+		loggedIn = <><button onClick={() => navigate('login')}>Login</button><button onClick={() => navigate('register')}>Register</button></>
 	} else {
 		loggedIn = <button onClick={Logout}>Logout</button>
 	}
@@ -19,7 +19,6 @@ function Navbar(){
 			<button onClick={() => navigate('create-expense')}>Catat Pengeluaran</button>
 			<button onClick={()=> navigate('search-year')}>Search Year</button>
 			<button onClick={()=> navigate('search-month')}>Search Month</button>
-			<button onClick={() => navigate('register')}>Register</button>
 			{loggedIn}
 		</div>
 	)
