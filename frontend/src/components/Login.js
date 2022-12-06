@@ -12,7 +12,7 @@ import axios, { AxiosError } from "axios";
     
         try {
           const response = await axios.get(
-            "http://localhost:8000/user",
+            "https://funpro-production-28fa.up.railway.app/user",
             {params :{
               username: values.username,
               password: values.password
