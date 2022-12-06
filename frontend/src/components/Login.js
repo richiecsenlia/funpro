@@ -3,12 +3,7 @@ import { useFormik } from 'formik';
 import axios, { AxiosError } from "axios";
  
  const LoginForm = () => {
-  const [username, setUsername] = useState('');
-
-  const set = () => {
-     localStorage.setItem('username', username);
-  }
-   const formik = useFormik({
+  const formik = useFormik({
      initialValues: {
 
      },
@@ -25,6 +20,7 @@ import axios, { AxiosError } from "axios";
           );
 
         localStorage.setItem('username', response.data[0].username);
+        window.location.reload(false)
         } catch (err) {
           console.log("Error: ", err);
           alert(err)

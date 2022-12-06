@@ -2,12 +2,12 @@ import { useNavigate } from 'react-router-dom'
 
 function Navbar(){
 	const navigate = useNavigate()
-	const logout = localStorage.removeItem('username')
+	
 	let loggedIn;
 	if (localStorage.getItem('username')===null){
 		loggedIn = <button onClick={() => navigate('login')}>Login</button>
 	} else {
-		loggedIn = <button onClick={logout}>Logout</button>
+		loggedIn = <button onClick={Logout}>Logout</button>
 	}
 	return(
 		<div>
@@ -20,4 +20,8 @@ function Navbar(){
 	)
 }
 
+function Logout(){
+	localStorage.removeItem('username')
+	window.location.reload(false)
+}
 export default Navbar
