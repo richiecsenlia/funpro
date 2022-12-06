@@ -28,7 +28,7 @@ const Notes = () => {
             })
     }
 
-    const cards = notes.map(note => {
+    const cards = notes.filter(note => note.noteOwner === localStorage.getItem('username')).map(note => {
         return (
             <Card key={note.id} style={{ width: '300px', margin: '2rem 0'}}>
                 <NoteCard
@@ -43,10 +43,16 @@ const Notes = () => {
     return (
         <div style={{ margin: '1rem'}}>
             <h1>Note List</h1>
-            <button onClick={() => navigate('createnote')}>Create note</button>
-			<div>
-                {cards}
-			</div>
+            {localStorage.getItem('username') === null ? 
+            <p>Login Required</p>
+            :
+            <div>
+                <button onClick={() => navigate('createnote')}>Create note</button>
+                <div>
+                    {cards}
+                </div>
+            </div>
+            }          
 		</div>
     );
 }

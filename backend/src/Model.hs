@@ -22,6 +22,7 @@ import qualified Database.Persist.TH as PTH
 
 PTH.share [PTH.mkPersist PTH.sqlSettings, PTH.mkMigrate "migrateAll"] [PTH.persistLowerCase|
 Note sql=notes
+    owner String
     title Text
     body Text
     deriving Show Read

@@ -16,6 +16,7 @@ function CreateNote() {
         e.preventDefault()
         console.log(data)
         Axios.post(url, {
+            noteOwner: localStorage.getItem('username'),
             noteTitle: data.title,
             noteBody: data.body,
         })
@@ -38,20 +39,23 @@ function CreateNote() {
     return (
         <div style={{ margin: '1rem', width: "20rem" }}>
 			<p>Create Note</p>
-			<Card>
-				<Form style={{ margin: "10px" }} onSubmit={(e) => submit(e)}>
-                    <Form.Group style={{ width: "100%" }}>
-                        <Form.Label>Judul Note :</Form.Label>
-                        <Form.Control onChange={(e) => handle(e)} type="text" id="title" autoComplete="off" maxLength="10" />
-                    </Form.Group>
-                    <Form.Group style={{ width: "100%" }}>
-                        <Form.Label>Isi Note :</Form.Label>
-                        <Form.Control onChange={(e) => handle(e)} as="textarea" id="body" autoComplete="off" maxLength="50" rows={6} />
-                    </Form.Group>
-					<Button type="submit" style={{ margin: 'auto'}}>Submit</Button>
-				</Form>
-			</Card>
-			
+            {localStorage.getItem('username') === null ?
+                <p>Login Required</p>
+                :
+                <Card>
+                    <Form style={{ margin: "10px" }} onSubmit={(e) => submit(e)}>
+                        <Form.Group style={{ width: "100%" }}>
+                            <Form.Label>Judul Note :</Form.Label>
+                            <Form.Control onChange={(e) => handle(e)} type="text" id="title" autoComplete="off" maxLength="10" />
+                        </Form.Group>
+                        <Form.Group style={{ width: "100%" }}>
+                            <Form.Label>Isi Note :</Form.Label>
+                            <Form.Control onChange={(e) => handle(e)} as="textarea" id="body" autoComplete="off" maxLength="50" rows={6} />
+                        </Form.Group>
+                        <Button type="submit" style={{ margin: 'auto' }}>Submit</Button>
+                    </Form>
+                </Card>
+            }	
 		</div>
     )
 }
