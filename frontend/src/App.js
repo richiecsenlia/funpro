@@ -14,6 +14,8 @@ import CreateExpense from './components/CreateExpense';
 import ListExpense from './components/ListExpense';
 import Search from './components/Search';
 import FilterExpense from './components/FilterExpense';
+import SignupForm from './components/Register'
+import LoginForm from './components/Login';
 function App() {
   const url = "https://funpro-production.up.railway.app"
   return (
@@ -39,7 +41,8 @@ function App() {
                                                     link={url+"/filterexpenseyear/"}/>}/>
           <Route path="search-month/:id" element = {<FilterExpense
                                                     link={url+"/filterexpensemonth/"}/>}/>
-
+          <Route path="register" element={<SignupForm />}/>
+          <Route path="login" element={<LoginForm />}/>
           <Route path="*" element={<NoPage />} />
           
 

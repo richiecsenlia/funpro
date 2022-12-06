@@ -25,8 +25,7 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
-      Lib2
+      User
   other-modules:
       Paths_backend2
   hs-source-dirs:

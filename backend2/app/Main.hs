@@ -16,7 +16,7 @@ import Network.Wai.Middleware.Cors
 import Network.Wai
 import Network.HTTP.Types
 import Data.Aeson (FromJSON, ToJSON)
-import Lib
+import User
 localPG :: ConnectInfo
 localPG = defaultConnectInfo
         { connectHost = "db.gnvlenttjmyipsadlofe.supabase.co"
@@ -69,8 +69,16 @@ main = do
         jadwalId <- param "jadwalId"
         out <- liftIO (deleteJadwal db jadwalId)
         html $ pack $ show $ fromInt64ToInt out
-
-
+    get "/user" $
+      do
+        name <- param "username"
+        pass <- param "password"
+        json =<< liftIO (getUser db (name,pass))
+    post "/user" $
+      do
+        newUser <- jsonData :: ActionM User
+        out <- liftIO(createUser db newUser)
+        json =<< liftIO (getUser db (extractNP newUser))
 fromInt64ToInt :: Int64 -> Int
 fromInt64ToInt = fromIntegral
 
