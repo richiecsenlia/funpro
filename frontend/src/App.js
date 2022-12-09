@@ -17,7 +17,8 @@ import FilterExpense from './components/FilterExpense';
 import SignupForm from './components/Register'
 import LoginForm from './components/Login';
 function App() {
-  const url = "https://funpro-production.up.railway.app"
+  // const url = "https://funpro-production.up.railway.app"
+  const url = "http://localhost:8080"
   return (
     <BrowserRouter>
       <Navbar/>

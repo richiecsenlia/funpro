@@ -42,8 +42,8 @@ runAction action = runStdoutLoggingT $ withPostgresqlConn connString $ \backend 
 migrateDB2 :: IO ()
 migrateDB2 = runAction (runMigration migrateAll)
 
-getAllExpense :: IO [Entity Expense]
-getAllExpense = runAction (selectList[][])
+getAllExpense :: String -> IO [Entity Expense]
+getAllExpense username = runAction (selectList[ExpenseUsername ==. username][])
 
 createExpense :: Expense -> IO Int64
 createExpense expense = fromSqlKey <$> runAction (insert $ expense) 

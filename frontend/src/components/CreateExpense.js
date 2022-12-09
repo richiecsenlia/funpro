@@ -3,8 +3,8 @@ import Axios from 'axios'
 import { Form, Button, Card } from 'react-bootstrap';
 
 function CreateExpense(){
-	// const url ="http://localhost:8080/expense/"
-	const url = "https://funpro-production.up.railway.app/expense/"
+	const url ="http://localhost:8080/expense/"
+	// const url = "https://funpro-production.up.railway.app/expense/"
 	const [data, setData] = useState({
 		total: 0,
 		usage: "",
@@ -15,16 +15,22 @@ function CreateExpense(){
 	function submit(e){
 		e.preventDefault()
 		console.log(data)
+		const username = localStorage.getItem("username")
+		if(username == null){
+			return
+		}
 		Axios.post(url,{
 			expenseTotal: parseInt(data.total),
 			expenseUsage: data.usage,
 			expenseDate: data.date,
+			expenseUsername : username
 		})
 		.catch(function (err){
 			alert("Error occurs!")
 		})
 		.then(res => {
 			console.log(res.data)
+			alert("Berhasil disimpan")
 		})
 		
 	}

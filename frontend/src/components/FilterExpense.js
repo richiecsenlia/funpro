@@ -12,7 +12,11 @@ function FilterExpense(props){
     // const [tmp,setTmp] = useState(0)
 	useEffect(() => {
 		console.log(props.link)
-		axios.get(props.link+id)
+		const username = localStorage.getItem("username")
+		if(username == null){
+			return
+		}
+		axios.get(props.link+id+"/"+username)
 		.then(res => {
 			console.log(res.data)
 			setList(res.data)
@@ -42,7 +46,9 @@ function FilterExpense(props){
 			</Card>
 		)
 	})
-
+	if(list.length == 0){
+		return <p> Belum ada pengeluaran </p>
+	}
 	return(		
 		<div style={{ margin: '1rem', width: "20rem" }}>
 			<p>List Jadwal</p>

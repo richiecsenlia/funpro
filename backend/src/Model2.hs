@@ -22,6 +22,7 @@ import qualified Database.Persist.TH as PTH
 import Data.Time
 PTH.share [PTH.mkPersist PTH.sqlSettings, PTH.mkMigrate "migrateAll"] [PTH.persistLowerCase|
 Expense sql = expenses
+    username String
     total Int
     usage String
     date Day Nullable nullable

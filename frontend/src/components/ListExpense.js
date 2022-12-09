@@ -5,11 +5,15 @@ import React from 'react'
 import { Card, Button} from 'react-bootstrap'
 
 function ListJadwal(props){
-	const url = "https://funpro-production.up.railway.app"
-
+	// const url = "https://funpro-production.up.railway.app"
+	const url = "http://localhost:8080"
 	const [list, setList] = useState([])
 	useEffect(() => {
-		axios.get(url+"/expenseall")
+		const username = localStorage.getItem("username")
+		if(username == null){
+			return
+		}
+		axios.get(url+"/expenseall/"+username)
 		.then(res => {
 			console.log(res.data)
 			setList(res.data)
@@ -37,7 +41,9 @@ function ListJadwal(props){
 			</Card>
 		)
 	})
-
+	if(list.length == 0){
+		return <p>Belum Ada Pengeluaran</p>
+	}
 	return(		
 		<div style={{ margin: '1rem'}}>
 			<p>List Jadwal</p>

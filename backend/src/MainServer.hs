@@ -20,21 +20,17 @@ import Model
 import Database
 import Model2
 import Database2
-type UsersAPI = "expenseall" :> Get '[JSON] [Entity Expense]
+type UsersAPI = "expenseall" :> Capture "username" String :> Get '[JSON] [Entity Expense]
                 :<|> "expense" :> ReqBody '[JSON] Expense :> Post '[JSON] Int64
                 :<|> "delete" :> Capture "id" Int64 :> Delete '[JSON] String
-                :<|> "expensekey" :> Get '[JSON] [Key Expense]
-                :<|> "filterexpenseyear" :> Capture "year" Integer :> Get '[JSON] [Expense]
-                :<|> "filterexpensemonth" :> Capture "month" Int :> Get '[JSON] [Expense]
-                :<|> "expenseinyear" :> Capture "year" Integer :> Get '[JSON] [Int]
+                :<|> "filterexpenseyear" :> Capture "year" Integer :> Capture "username" String :> Get '[JSON] [Expense]
+                :<|> "filterexpensemonth" :> Capture "month" Int :> Capture "username" String :>  Get '[JSON] [Expense]
+                :<|> "expenseinyear" :> Capture "year" Integer :> Capture "username" String :> Get '[JSON] [Int]
                 :<|>"notes" :> "getall" :> Get '[JSON] [Entity Note]
                 :<|> "notes" :> "create" :> ReqBody '[JSON] Note :> Post '[JSON] Int64
                 :<|> "notes" :> "update" :> Capture "id" Int64 :> ReqBody '[JSON] Note :> Post '[JSON] ()
                 :<|> "notes" :> "delete" :> Capture "id" Int64 :> Delete '[JSON] ()
 
-getId = do 
-              isi <- getAllExpense
-              return (map entityKey isi)
 
 -- cobacoba3 year = do
 --               isi <- getAllExpense
@@ -46,15 +42,15 @@ getId = do
 --               isi <- getAllExpense
 --               return (getTotalPerMonthInYear year (map entityVal isi))
 
-filterExpense f x = do
-                    isi <- getAllExpense
+filterExpense f x y = do
+                    isi <- getAllExpense y
                     return (f x (map entityVal isi))
 
-getFilterYear x = filterExpense (filterYear) x
+getFilterYear = filterExpense (filterYear) 
 
-getFIlterMonth x = filterExpense (filterMonth) x
+getFIlterMonth = filterExpense (filterMonth) 
 
-getTotal x =  filterExpense (getTotalPerMonthInYear) x
+getTotal =  filterExpense (getTotalPerMonthInYear) 
 
 createExpenseHandler :: Expense -> Handler Int64
 createExpenseHandler expense = liftIO $ createExpense expense
@@ -62,20 +58,18 @@ createExpenseHandler expense = liftIO $ createExpense expense
 deleteExpenseHandler :: Int64 -> Handler String
 deleteExpenseHandler id = liftIO $ deleteExpense id
 
-getIdHandler :: Handler [Key Expense]
-getIdHandler = liftIO getId
 
-filterYearHandler :: Integer -> Handler [Expense]
-filterYearHandler year = liftIO $ getFilterYear year
+filterYearHandler :: Integer -> String -> Handler [Expense]
+filterYearHandler year username = liftIO $ getFilterYear year username
 
-filterMonthHandler :: Int -> Handler [Expense]
-filterMonthHandler month = liftIO $ getFIlterMonth month
+filterMonthHandler :: Int -> String -> Handler [Expense]
+filterMonthHandler month username = liftIO $ getFIlterMonth month username
 
-totalPerMonthInYearHandler :: Integer -> Handler [Int]
-totalPerMonthInYearHandler year = liftIO $ getTotal year
+totalPerMonthInYearHandler :: Integer -> String -> Handler [Int]
+totalPerMonthInYearHandler year username = liftIO $ getTotal year username
 
-getAllExpenseHandler :: Handler [Entity Expense]
-getAllExpenseHandler = liftIO $ getAllExpense
+getAllExpenseHandler :: String -> Handler [Entity Expense]
+getAllExpenseHandler username = liftIO $ getAllExpense username
 
 createNoteHandler :: Note -> Handler Int64
 createNoteHandler note = liftIO $ createNote note
@@ -93,7 +87,6 @@ usersServer :: Server UsersAPI
 usersServer =   getAllExpenseHandler
                 :<|> (createExpenseHandler) 
                 :<|> (deleteExpenseHandler) 
-                :<|> (getIdHandler) 
                 :<|> (filterYearHandler) 
                 :<|> (filterMonthHandler) 
                 :<|> (totalPerMonthInYearHandler) 
