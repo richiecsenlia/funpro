@@ -63,7 +63,7 @@ main = do
         out <- liftIO(createUser db newUser)
         json =<< liftIO (getUser db (extractNP newUser))
 
--- ref/docs:
+-- ref/docs :
 -- https://stackoverflow.com/questions/33374136/using-postgres-simple-how-do-i-get-multiple-parameters-from-a-row
 -- https://dev.to/cdimitroulas/a-very-simple-json-api-in-haskell-1jgk
 -- https://hackage.haskell.org/package/scotty-0.12.1/docs/Web-Scotty.html # Web-Scotty documentation
