@@ -10,7 +10,7 @@ function Total(props){
 	// const url = "http://localhost:8080"
     const {year} = useParams()
 	const [list, setList] = useState([])
-    const {total,setTotal} = useState(0)
+    const [total,setTotal] = useState(0)
 	const {state: authState, dispatch } = React.useContext(AuthContext);
     const month = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","December"]
 	useEffect(() => {
@@ -23,8 +23,9 @@ function Total(props){
 			console.log(res.data)
 			setList(res.data)
             
-        axios.post("https://funpro.netlify.app/.netlify/functions/tes",res.data)
+        axios.post("https://funpro.netlify.app/.netlify/functions/total",JSON.stringify(res.data))
         .then((res2)=>{
+            console.log("response",res2.data)
             setTotal(res2.data)
         })
 		})

@@ -1,4 +1,6 @@
-import { useState,React } from 'react'
+import { useState } from 'react'
+import React from 'react';
+
 import Axios from 'axios'
 import { Form, Button, Card } from 'react-bootstrap';
 import { AuthContext } from '../App';
