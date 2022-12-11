@@ -17,6 +17,7 @@ import Network.Wai
 import Network.HTTP.Types
 import Data.Aeson (FromJSON, ToJSON)
 import User
+
 localPG :: ConnectInfo
 localPG = defaultConnectInfo
         { connectHost = "db.gnvlenttjmyipsadlofe.supabase.co"
@@ -30,13 +31,14 @@ data Jadwal = Jadwal
     nama_jadwal :: String,
     tanggal :: Day,
     waktu :: TimeOfDay,
-    catatan :: String
+    catatan :: String,
+    user_username :: String
   }
   deriving (Generic, Show)
 instance ToJSON Jadwal
 instance FromJSON Jadwal
 instance FromRow Jadwal where
-  fromRow = Jadwal <$> field <*> field <*> field <*> field <*> field
+  fromRow = Jadwal <$> field <*> field <*> field <*> field <*> field <*> field
 
 corsPolicy :: Middleware
 corsPolicy = cors (const $ Just policy)
@@ -55,10 +57,11 @@ main = do
     get "/" $ 
       do
         html "Hello!!"
-    get "/jadwal" $ 
+    get "/jadwal/:username" $ 
       do
-        json =<< liftIO (getJadwal db)
-    post "/jadwal" $
+        getUsername <- param "username"
+        json =<< liftIO (getJadwal db getUsername)
+    post "/jadwal/" $
       do
         newJadwal <- jsonData :: ActionM Jadwal
         out <- liftIO (insertJadwal db newJadwal)
@@ -81,12 +84,12 @@ main = do
 fromInt64ToInt :: Int64 -> Int
 fromInt64ToInt = fromIntegral
 
-getJadwal :: Connection -> IO [Jadwal]
-getJadwal db = (query_ db "SELECT * FROM jadwal" :: IO [Jadwal])
+getJadwal :: Connection -> String -> IO [Jadwal]
+getJadwal db user = (query db "SELECT * FROM jadwal WHERE user_username = ?" [user :: String]) :: IO [Jadwal]
 
 insertJadwal :: Connection -> Jadwal -> IO Int64
-insertJadwal db Jadwal {nama_jadwal = nama, tanggal = tgl, waktu = wkt, catatan = cat} =
-  execute db "INSERT INTO jadwal(nama_jadwal, tanggal, waktu, catatan) VALUES (?, ?, ?, ?)" (nama :: String, tgl :: Day, wkt :: TimeOfDay, cat :: String)
+insertJadwal db Jadwal {nama_jadwal = nama, tanggal = tgl, waktu = wkt, catatan = cat, user_username = user}=
+  execute db "INSERT INTO jadwal(nama_jadwal, tanggal, waktu, catatan, user_username) VALUES (?, ?, ?, ?, ?)" (nama :: String, tgl :: Day, wkt :: TimeOfDay, cat :: String, user :: String)
 
 deleteJadwal :: Connection -> Int -> IO Int64
 deleteJadwal db jadwalId = execute db "DELETE FROM jadwal WHERE id_jadwal = ?" [jadwalId :: Int]
