@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik} from 'formik';
 import axios from "axios";
-import { AuthContext, url } from '../App';
+import { AuthContext, be2url } from '../App';
 import { useNavigate } from 'react-router-dom';
  const SignupForm = () => {
   const {dispatch} = React.useContext(AuthContext);
@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
       console.log("Values: ", values);
       try {
         const response = await axios.post(
-          url+"/user",
+          be2url+"/user",
           values
         );
         actions.setSubmitting(false);

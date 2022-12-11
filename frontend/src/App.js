@@ -18,8 +18,10 @@ import FilterExpense from './components/FilterExpense';
 import SignupForm from './components/Register'
 import LoginForm from './components/Login';
 
-// export const url = "https://funpro-production.up.railway.app"
-export const url = "http://localhost:8000"
+export const url = "https://funpro-production.up.railway.app"
+export const be2url = "https://funpro-production-28fa.up.railway.app"
+// export const url = "http://localhost:8080"
+// export const be2url = "http://localhost:8000"
 
 // sumber : https://www.freecodecamp.org/news/state-management-with-react-hooks/
 export const AuthContext = React.createContext();
