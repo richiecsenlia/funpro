@@ -18,12 +18,16 @@ import FilterExpense from './components/FilterExpense';
 import SignupForm from './components/Register'
 import LoginForm from './components/Login';
 
+// export const url = "https://funpro-production.up.railway.app"
+export const url = "http://localhost:8000"
+
 // sumber : https://www.freecodecamp.org/news/state-management-with-react-hooks/
 export const AuthContext = React.createContext();
 const initialState = {
   isAuthenticated: false,
   username: null,
 };
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
@@ -45,8 +49,6 @@ const reducer = (state, action) => {
   }
 };
 function App() {
-  // const url = "https://funpro-production.up.railway.app"
-  const url = "http://localhost:8080"
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <AuthContext.Provider
@@ -77,11 +79,8 @@ function App() {
                                                       link={url+"/filterexpenseyear/"}/>}/>
             <Route path="search-month/:id" element = {<FilterExpense
                                                       link={url+"/filterexpensemonth/"}/>}/>
-            {!state.isAuthenticated ? <Route path="register" element={<SignupForm />}/>: <Route path="login" element={<LoginForm />}/>}
+            {!state.isAuthenticated ? <><Route path="register" element={<SignupForm />} /><Route path="login" element={<LoginForm />} /></>: <></>}
             <Route path="*" element={<NoPage />} />
-            
-
-          
           
         </Routes>
       </BrowserRouter>
