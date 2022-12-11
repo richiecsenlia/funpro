@@ -37,7 +37,7 @@ main = do
     middleware corsPolicy
     get "/" $ 
       do
-        html "Hello!!"
+        html "This is Backend2 (Web: Scotty, Database: postgresql-simple, JSON Parser: Aeson)!"
     get "/jadwal/:username" $ 
       do
         getUsername <- param "username"
