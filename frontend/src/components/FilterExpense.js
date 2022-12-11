@@ -4,15 +4,17 @@ import axios from "axios"
 import React from 'react'
 import { Card, Button} from 'react-bootstrap'
 import {useParams} from 'react-router-dom'
+import { AuthContext } from '../App';
 
 function FilterExpense(props){
 	const {id} = useParams()
 	const [list, setList] = useState([])
+	const {state: authState, dispatch } = React.useContext(AuthContext);
     // const [val, setVal] = useState(0)
     // const [tmp,setTmp] = useState(0)
 	useEffect(() => {
 		console.log(props.link)
-		const username = localStorage.getItem("username")
+		const username = authState.username
 		if(username == null){
 			return
 		}

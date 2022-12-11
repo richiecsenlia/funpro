@@ -3,13 +3,14 @@ import ExpenseCard from "./ExpenseCard"
 import axios from "axios"
 import React from 'react'
 import { Card, Button} from 'react-bootstrap'
-
+import { AuthContext } from '../App';
 function ListJadwal(props){
-	// const url = "https://funpro-production.up.railway.app"
-	const url = "http://localhost:8080"
+	const url = "https://funpro-production.up.railway.app"
+	// const url = "http://localhost:8080"
 	const [list, setList] = useState([])
+	const {state: authState, dispatch } = React.useContext(AuthContext);
 	useEffect(() => {
-		const username = localStorage.getItem("username")
+		const username = authState.username
 		if(username == null){
 			return
 		}

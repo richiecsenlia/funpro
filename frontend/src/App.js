@@ -2,7 +2,7 @@ import React from "react";
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import AllExpense from "./pages/AllExpense";
+import TotalForm from "./components/TotalForm"
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
 import CreateJadwal from './components/CreateJadwal'
@@ -17,6 +17,7 @@ import Search from './components/Search';
 import FilterExpense from './components/FilterExpense';
 import SignupForm from './components/Register'
 import LoginForm from './components/Login';
+import Total from "./components/Total";
 
 export const url = "https://funpro-production.up.railway.app"
 export const be2url = "https://funpro-production-28fa.up.railway.app"
@@ -81,6 +82,8 @@ function App() {
                                                       link={url+"/filterexpenseyear/"}/>}/>
             <Route path="search-month/:id" element = {<FilterExpense
                                                       link={url+"/filterexpensemonth/"}/>}/>
+            <Route path="total/:year" element = {<Total/>}/>
+            <Route path="expense-detail" element={<TotalForm />}/>
             {!state.isAuthenticated ? <><Route path="register" element={<SignupForm />} /><Route path="login" element={<LoginForm />} /></>: <></>}
             <Route path="*" element={<NoPage />} />
           

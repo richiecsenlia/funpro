@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState,React } from 'react'
 import Axios from 'axios'
 import { Form, Button, Card } from 'react-bootstrap';
+import { AuthContext } from '../App';
 
 function CreateExpense(){
-	const url ="http://localhost:8080/expense/"
-	// const url = "https://funpro-production.up.railway.app/expense/"
+	// const url ="http://localhost:8080/expense/"
+	const url = "https://funpro-production.up.railway.app/expense/"
+	const {state: authState, dispatch } = React.useContext(AuthContext);
+    
 	const [data, setData] = useState({
 		total: 0,
 		usage: "",
@@ -15,7 +18,7 @@ function CreateExpense(){
 	function submit(e){
 		e.preventDefault()
 		console.log(data)
-		const username = localStorage.getItem("username")
+		const username = authState.username
 		if(username == null){
 			return
 		}

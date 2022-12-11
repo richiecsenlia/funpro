@@ -23,6 +23,7 @@ function Navbar(){
 			<button onClick={() => navigate('create-expense')}>Catat Pengeluaran</button>
 			<button onClick={()=> navigate('search-year')}>Search Year</button>
 			<button onClick={()=> navigate('search-month')}>Search Month</button>
+			<button onClick={()=> navigate('expense-detail')}>Expense Detail</button>
 			{authState.isAuthenticated? loggedIn : loggedOut}
 		</div>
 	)
