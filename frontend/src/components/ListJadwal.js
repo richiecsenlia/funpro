@@ -12,7 +12,7 @@ function ListJadwal(){
 	const [feedback, setFeedback] = useState(false)
 
 	useEffect(() => {
-		axios.get('http://funpro-production-28fa.up.railway.app/jadwal/' + localStorage.getItem('username'))
+		axios.get('https://funpro-production-28fa.up.railway.app/jadwal/' + localStorage.getItem('username'))
 		.then(res => {
 			console.log(res.data)
 			setList(res.data)
@@ -21,7 +21,7 @@ function ListJadwal(){
 	}, []);
 
 	const handleDelete = (id) => {
-		axios.delete('http://funpro-production-28fa.up.railway.app/delete-jadwal/' + id)
+		axios.delete('https://funpro-production-28fa.up.railway.app/delete-jadwal/' + id)
 		.then(res => {
 			console.log(res.data)
 			setFeedback(true)
