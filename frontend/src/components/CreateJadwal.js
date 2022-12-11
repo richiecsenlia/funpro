@@ -3,7 +3,7 @@ import Axios from 'axios'
 import { Form, Button, Card } from 'react-bootstrap';
 
 function CreateJadwal(){
-	const url ="https://funpro-production-28fa.up.railway.app/jadwal"
+	const url ="http://funpro-production-28fa.up.railway.app/jadwal/"
 
 	const [data, setData] = useState({
 		name: "",
@@ -20,7 +20,8 @@ function CreateJadwal(){
 			id_jadwal: 1,	// do not touch
 			nama_jadwal: data.name,
 			tanggal: data.date,
-			waktu: data.time	
+			waktu: data.time,
+			user_username: localStorage.getItem('username')	
 		})
 		.catch(function (err){
 			alert("Error occurs!")
@@ -36,6 +37,14 @@ function CreateJadwal(){
 		newData[e.target.id] = e.target.value
 		setData(newData)
 		console.log(newData)
+	}
+
+	if(localStorage.getItem('username') === null){
+		return(
+		<div style={{ margin: '1rem'}}>
+			<p>Login Required</p>
+		</div>
+		)
 	}
 
 	return(

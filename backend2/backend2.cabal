@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      Jadwal
       User
   other-modules:
       Paths_backend2
